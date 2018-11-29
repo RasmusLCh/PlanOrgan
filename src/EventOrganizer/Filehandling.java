@@ -45,6 +45,7 @@ public class Filehandling {
                 newLines.add("EMPTY SPACE");
                 for (int i = 0; i <= line; i++){
                     newLines.add("EMPTY SPACE");
+                    content.add("EMPTY SPACE");
                 }
                 Files.write(path, newLines, StandardCharsets.UTF_8);
             }

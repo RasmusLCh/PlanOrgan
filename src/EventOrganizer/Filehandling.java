@@ -16,23 +16,23 @@ public class Filehandling {
 
     public static void addExportable(Exportable exportable){
         selectedExports.add(exportable);
-    }
+    } //metode der tilføjer et objekt til den selektive liste.
     public static void removeExportable(Exportable exportable){
         selectedExports.remove(exportable);
-    }
+    } //metode der fjerner et objekt fra den selektive liste.
     public static void executeExport(){
         for (int i = 0; i < selectedExports.size(); i++){
             selectedExports.get(i).exportData();
         }
-    }
+    } //metode der eksporterer alt fra den selektive liste.
     public static void autoAddExportable(Exportable exportable){
         allExports.add(exportable);
-    }
+    } //Metode der bliver kaldt som følge af en konstruktor, som tilføjer objektet til allExports listen.
     public static void exportAll(){
         for (int i = 0; i < allExports.size(); i++){
             allExports.get(i).exportData();
         }
-    }
+    } //Exporterer alle objekter i allExports listen.
 
     public static void writeToLine(String fileName, String text, int line) {
         readingFile = new File(fileName + ".csv");
@@ -52,7 +52,7 @@ public class Filehandling {
             content.set(line, text);
             Files.write(path, content, StandardCharsets.UTF_8);
         } catch (IOException ioe) { }
-    }
+    } //Metode til at skrive til en specifik linje i en fil.
 
     /* Import sektion - Alt her er relevant for export af data */
     private static File readingFile;

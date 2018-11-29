@@ -7,7 +7,7 @@ public class Facilitator implements Readable, Exportable {
     @Override
     public void read() {
 
-    }
+    } //Fra Interface Readable, tillader objektet at blive læst
     @Override
     public void exportData() {
         String arrangementList = "";
@@ -21,11 +21,11 @@ public class Facilitator implements Readable, Exportable {
         Filehandling.writeToLine("FACILITATOR_" + ID, name, 0);
         Filehandling.writeToLine("FACILITATOR_" + ID, arrangementList, 1);
         Filehandling.writeToLine("FACILITATOR_" + ID, eventList, 2);
-    }
+    } //Fra Interface Exportable, tillader objektet at blive eksporteret til en Arrangement fil
     @Override
     public void importData() {
         Menu.setCurrentRead(this);
-    }
+    } //Fra Interface Exportable, tillader objektet at blive læst fra en Arrangement fil
 
     private String ID;
     private String name;
@@ -65,7 +65,7 @@ public class Facilitator implements Readable, Exportable {
         if(!alreadyExists){
             listOfArrangements.add(event.getArrangement());
         }
-    }
+    } //Tilføjer et event til facilitators liste, plus det tilhørende arrangement, hvis det ikke allerede er på.
     public ArrayList<Arrangement> getListOfArrangements(){
         return listOfArrangements;
     }

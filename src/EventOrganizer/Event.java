@@ -1,6 +1,5 @@
 package EventOrganizer;
 
-import java.net.IDN;
 import java.time.LocalDateTime;
 
 public class Event implements Readable, Exportable {
@@ -17,12 +16,12 @@ public class Event implements Readable, Exportable {
     private String name = "New Event";
     private String description = "Insert description here";
     private Arrangement arrangement = null;
-    private LocalDateTime startTime = LocalDateTime.now();
+    private LocalDateTime startTime = LocalDateTime.now(); //LocalDateTime er en importeret klasse der holder styr på tid.
     private LocalDateTime endTime = LocalDateTime.now();
     private Facilitator facilitator = null;
     private String comment = "";
     private String location = "";
-    private String customer = "";
+    private Customer customer;
 
     public int getID(){
         return this.ID;
@@ -79,10 +78,10 @@ public class Event implements Readable, Exportable {
     public void setLocation(String location) {
         this.location = location;
     }
-    public String getCustomer() {
+    public Customer getCustomer() {
         return customer;
     }
-    public void setCustomer(String customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
@@ -90,7 +89,7 @@ public class Event implements Readable, Exportable {
         return 2;
     }
     public void deleteEvent(){
-        //find filen, og slet information kun om denne
+        //find den relevante arrangement filen, og sletter information, kun om denne
     }
 
 }

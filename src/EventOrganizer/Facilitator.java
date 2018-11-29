@@ -18,7 +18,9 @@ public class Facilitator implements Readable, Exportable {
         for (int i = 0; i < listOfEvents.size(); i++){
             eventList += listOfEvents.get(i).getName() + ",";
         }
-        Filehandling.writeToFile(ID, name + "\n" + arrangementList + "\n" + eventList);
+        Filehandling.writeToLine("FACILITATOR_" + ID, name, 0);
+        Filehandling.writeToLine("FACILITATOR_" + ID, arrangementList, 1);
+        Filehandling.writeToLine("FACILITATOR_" + ID, eventList, 2);
     }
     @Override
     public void importData() {

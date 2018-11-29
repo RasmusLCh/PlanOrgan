@@ -1,5 +1,6 @@
 package EventOrganizer;
 
+import java.net.IDN;
 import java.time.LocalDateTime;
 
 public class Event implements Readable, Exportable {
@@ -12,16 +13,23 @@ public class Event implements Readable, Exportable {
     @Override
     public void importData() { } //Events af en uspecificeret type kan ikke importeres
 
+    private int ID = 0;
     private String name = "New Event";
     private String description = "Insert description here";
-    private Arrangement arrangement;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
-    private Facilitator facilitator;
-    private String comment;
-    private String location;
-    private String customer;
+    private Arrangement arrangement = null;
+    private LocalDateTime startTime = LocalDateTime.now();
+    private LocalDateTime endTime = LocalDateTime.now();
+    private Facilitator facilitator = null;
+    private String comment = "";
+    private String location = "";
+    private String customer = "";
 
+    public int getID(){
+        return this.ID;
+    }
+    public void setID(int ID){
+        this.ID = ID;
+    }
     public String getName(){
         return this.name;
     }

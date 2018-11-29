@@ -1,8 +1,12 @@
 package EventOrganizer;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.List;
 
 public class Filehandling {
 
@@ -30,42 +34,29 @@ public class Filehandling {
         }
     }
 
-    /* Import sektion - Alt her er relevant for export af data */
-    private File file;
-    private Scanner scanner;
-
-    public static void writeToFile(String fileName, String text) {
+    public static void writeToLine(String fileName, String text, int line) {
+        readingFile = new File(fileName + ".csv");
         try {
-            Scanner scanner = new Scanner(new File(fileName + ".csv"));
-            while (scanner.hasNextLine()){
-
+            readingFile.createNewFile();
+            Path path = Paths.get(fileName + ".csv");
+            List<String> content = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
+            if(content.size() < line + 1){
+                List<String > newLines = new ArrayList<>();
+                newLines.add("EMPTY SPACE");
+                for (int i = 0; i <= line; i++){
+                    newLines.add("EMPTY SPACE");
+                }
+                Files.write(path, newLines, StandardCharsets.UTF_8);
             }
-
-
-/*            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName + ".csv"));
-            BufferedReader reader = new BufferedReader(new FileReader(fileName + ".csv"));
-            while (reader.readLine() != null) {
-//                    writer.newLine();
-            }
-            writer.write(text);
-            writer.close();
-            reader.close();*/
-        } catch (FileNotFoundException fnfe) {} catch (IOException ioe) {}
-
-
-/*        try {
-            PrintWriter writer = new PrintWriter(fileName + ".csv", "UTF-8");
-            writer.println(text);
-            writer.close();
-        } catch (FileNotFoundException fnfe) {} catch (UnsupportedEncodingException uee) {} catch (IOException ioe) {}*/
-
+            content.set(line, text);
+            Files.write(path, content, StandardCharsets.UTF_8);
+        } catch (IOException ioe) { }
     }
 
-    public static void writeToLine(String lineName, String text) {
+    /* Import sektion - Alt her er relevant for export af data */
+    private static File readingFile;
 
-    }
-
-    public void setFile(File file){
-        this.file = file;
+    public static void setFile(File file){
+        readingFile = file;
     }
 }

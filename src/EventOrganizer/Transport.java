@@ -8,7 +8,7 @@ public class Transport extends Event {
     }
     @Override
     public void exportData() {
-//        Filehandling.writeToFile(getArrangement().getName(), "transport");
+        Filehandling.writeToLine("ARRANGEMENT_" + getArrangement().getName(), "Transport," + getFacilitator().getName() + "," + getDescription() + "," + getStartTime() + "," + getEndTime() + "," + getComment() + "," + getLocation() + "," + getCustomer() + "," + destination + "," + vehicle, getID());
 
     }
     @Override
@@ -16,8 +16,8 @@ public class Transport extends Event {
         Menu.setCurrentRead(this);
     }
 
-    private String destination;
-    private String vehicle;
+    private String destination = "";
+    private String vehicle = "";
 
     public Transport() {
         Filehandling.autoAddExportable(this);

@@ -1,6 +1,5 @@
 package EventOrganizer;
 
-import java.io.File;
 import java.util.Scanner;
 
 public class Menu {
@@ -10,16 +9,17 @@ public class Menu {
     private static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args){
+        Arrangement ar = new Arrangement();
+        Transport tr = new Transport();
+        tr.setID(1);
+        tr.setArrangement(ar);
         Facilitator fc = new Facilitator();
         fc.setID("JANP");
         fc.setName("Janus");
-        Arrangement ar = new Arrangement();
-        Excursion ex = new Excursion();
+        tr.setFacilitator(fc);
+/*        Excursion ex = new Excursion();
         ex.setArrangement(ar);
-        Transport tr = new Transport();
-        tr.setArrangement(ar);
-        fc.addToEventList(ex);
-        fc.addToEventList(tr);
+        fc.addToEventList(ex);*/
         Filehandling.exportAll();
 //        Filehandling.writeToFile("Default", "ting");
 //        startMenu();

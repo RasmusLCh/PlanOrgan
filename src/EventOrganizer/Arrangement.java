@@ -10,7 +10,8 @@ public class Arrangement implements Readable, Exportable {
     }
     @Override
     public void exportData() {
-        Filehandling.writeToFile(name, startTime.toString() + "," + endTime.toString() + "," + getPrice());
+//        Filehandling.writeToFile(name, startTime.toString() + "," + endTime.toString() + "," + getPrice());
+        Filehandling.writeToLine("ARRANGEMENT_" + name,startTime.toString() + "," + endTime.toString() + "," + getPrice(), 0);
     }
     @Override
     public void importData() {

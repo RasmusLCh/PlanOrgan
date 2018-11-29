@@ -10,14 +10,22 @@ public class Facilitator implements Readable, Exportable {
     }
     @Override
     public void exportData() {
-        System.out.println(this + " was exported as a " + getClass());
+        String arrangementList = "";
+        for (int i = 0; i < listOfArrangements.size(); i++){
+            arrangementList += listOfArrangements.get(i).getName() + ",";
+        }
+        String eventList = "";
+        for (int i = 0; i < listOfEvents.size(); i++){
+            eventList += listOfEvents.get(i).getName() + ",";
+        }
+        Filehandling.writeToFile(ID, name + "\n" + arrangementList + "\n" + eventList);
     }
     @Override
     public void importData() {
         Menu.setCurrentRead(this);
     }
 
-    private int ID;
+    private String ID;
     private String name;
     private ArrayList<Event> listOfEvents;
     private ArrayList<Arrangement> listOfArrangements;
@@ -25,12 +33,13 @@ public class Facilitator implements Readable, Exportable {
     public Facilitator() {
         Filehandling.autoAddExportable(this);
         listOfEvents = new ArrayList<>();
+        listOfArrangements = new ArrayList<>();
     }
 
-    public int getID() {
+    public String getID() {
         return ID;
     }
-    public void setID(int ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
     public String getName() {

@@ -8,7 +8,8 @@ public class Transport extends Event {
     }
     @Override
     public void exportData() {
-        System.out.println(this + " was exported a " + getClass());
+//        Filehandling.writeToFile(getArrangement().getName(), "transport");
+
     }
     @Override
     public void importData() {

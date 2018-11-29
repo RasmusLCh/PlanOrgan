@@ -10,7 +10,7 @@ public class Arrangement implements Readable, Exportable {
     }
     @Override
     public void exportData() {
-        System.out.println(this + " was exported as a " + getClass());
+        Filehandling.writeToFile(name, startTime.toString() + "," + endTime.toString() + "," + getPrice());
     }
     @Override
     public void importData() {
@@ -19,8 +19,8 @@ public class Arrangement implements Readable, Exportable {
 
     private String name = "New Arrangement";
     private float price = 0;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private LocalDateTime startTime = LocalDateTime.now();
+    private LocalDateTime endTime = LocalDateTime.now();
 
     public Arrangement() {
         Filehandling.autoAddExportable(this);
@@ -51,7 +51,4 @@ public class Arrangement implements Readable, Exportable {
     public void deleteArrangement(){
         //find filen, og slet den
     }
-
-
-
 }

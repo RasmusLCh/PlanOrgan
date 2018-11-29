@@ -57,6 +57,7 @@ public class Event implements Readable, Exportable {
     }
     public void setFacilitator(Facilitator facilitator) {
         this.facilitator = facilitator;
+        facilitator.addToEventList(this);
     }
     public String getComment() {
         return comment;

@@ -1,14 +1,14 @@
 package EventOrganizer;
 
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Filehandling {
 
     /* Export sektion - Alt her er relevant for export af data */
-    static ArrayList<Exportable> selectedExports = new ArrayList<>(); //Package private, en liste over udvalgte objekter
-    static ArrayList<Exportable> allExports = new ArrayList<>(); //Package private, en liste over alle objekter der er blevet oprettet/redigeret i denne session.
+    private static ArrayList<Exportable> selectedExports = new ArrayList<>(); //Package private, en liste over udvalgte objekter
+    private static ArrayList<Exportable> allExports = new ArrayList<>(); //Package private, en liste over alle objekter der er blevet oprettet/redigeret i denne session.
 
     public static void addExportable(Exportable exportable){
         selectedExports.add(exportable);
@@ -33,6 +33,37 @@ public class Filehandling {
     /* Import sektion - Alt her er relevant for export af data */
     private File file;
     private Scanner scanner;
+
+    public static void writeToFile(String fileName, String text) {
+        try {
+            Scanner scanner = new Scanner(new File(fileName + ".csv"));
+            while (scanner.hasNextLine()){
+
+            }
+
+
+/*            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName + ".csv"));
+            BufferedReader reader = new BufferedReader(new FileReader(fileName + ".csv"));
+            while (reader.readLine() != null) {
+//                    writer.newLine();
+            }
+            writer.write(text);
+            writer.close();
+            reader.close();*/
+        } catch (FileNotFoundException fnfe) {} catch (IOException ioe) {}
+
+
+/*        try {
+            PrintWriter writer = new PrintWriter(fileName + ".csv", "UTF-8");
+            writer.println(text);
+            writer.close();
+        } catch (FileNotFoundException fnfe) {} catch (UnsupportedEncodingException uee) {} catch (IOException ioe) {}*/
+
+    }
+
+    public static void writeToLine(String lineName, String text) {
+
+    }
 
     public void setFile(File file){
         this.file = file;

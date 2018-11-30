@@ -1,27 +1,22 @@
 package EventOrganizer;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
 
+    public static ArrayList<Facilitator> facilitators = new ArrayList<>();
+    public static ArrayList<Arrangement> arrangements = new ArrayList<>();
+    public static ArrayList<Event> events = new ArrayList<>();
+
     private static Readable currentRead;
     private static int intInput;
-    private static String strInput;
+    private static String stringInput;
     private static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args){
-        /*        Arrangement ar = new Arrangement();
-        Transport tr = new Transport();
-        tr.setID(1);
-        tr.setArrangement(ar);
-        Facilitator fc = new Facilitator();
-        fc.setID("JANP");
-        fc.setName("Janus");
-        tr.setFacilitator(fc);
-        Excursion ex = new Excursion();
-        ex.setArrangement(ar);
-        fc.addToEventList(ex);*/
-//        Filehandling.exportAll();
+//       Filehandling.importAll();
+
         startMenu();
         return;
     }
@@ -49,6 +44,14 @@ public class Menu {
 
     }
 
+    private static void createMenu(){
+        // Operette eller redigere
+    }
+
+    private static void editMenu (){
+        // redigere
+    }
+
 
     private static void arrangementMenu(){
         System.out.println("Do you wish to create or edit an Arrangement? \n 1: Create \n 2: Edit \n 0: Return");
@@ -69,15 +72,13 @@ public class Menu {
     }
 
     private static void editArrangement(Arrangement arrangement){
-        System.out.println("Currently editing " + arrangement.getName());
-        System.out.println("Currently slated price: " + arrangement.getPrice());
-        System.out.println(" 1: Name \n 99: Delete Arrangement \n 0: Return \n 111: Select for Export \n 112: Export Selected \n 113: Export All");
+        currentRead.read();
         intInput = input.nextInt();
         switch (intInput){
             case 1: System.out.println("Current name: " + arrangement.getName());
                 System.out.println("New Name: ");
-                strInput = input.next();
-                arrangement.setName(strInput);
+                stringInput = input.next();
+                arrangement.setName(stringInput);
                 editArrangement(arrangement);
                 break;
             case 99: System.out.println("Are you sure you wish to delete this Arrangement, and all of its associated events? \n 1: Yes \n Default: No");
@@ -106,6 +107,7 @@ public class Menu {
 
 
     private static void eventMenu(){
+        // ARRANGEMENT SELECTION ?
         System.out.println("Do you wish to create or edit an Event? \n 1: Create \n 2: Edit \n 0: Return");
         intInput = input.nextInt();
         switch (intInput){
@@ -126,10 +128,13 @@ public class Menu {
         intInput = input.nextInt();
         switch (intInput) {
             case 1: currentRead = new Excursion();
+            editExcursion((Excursion)currentRead);
                 break;
             case 2: currentRead = new Meeting();
+            editMeeting((Meeting)currentRead);
                 break;
             case 3: currentRead = new Transport();
+            editTransport((Transport)currentRead);
                 break;
             case 0: eventMenu();
                 break;
@@ -137,19 +142,41 @@ public class Menu {
                 createEvent();
                 break;
         }
-        editEvent((Event) currentRead);
     }
 
-    private static void editEvent(Event event){
-        System.out.println("Currently editing " + event.getName());
-//        System.out.println(" 1: Name \n \n \n 99: Delete Event \n 0: Return \n 111: Select for Export \n 112: Export Selected \n 113: Export All");
+    private static void editExcursion(Event event){
+        currentRead.read();
         intInput = input.nextInt();
         switch (intInput){
-            case 1: System.out.println("Current name: " + event.getName());
+            case 1: System.out.println("Current ID: " + event.getID());
+                System.out.println("New ID: ");
+                intInput = input.nextInt();
+                event.setID(intInput);
+                editExcursion(event);
+                break;
+            case 2: System.out.println("Current name: " + event.getName());
                 System.out.println("New Name: ");
-                strInput = input.next();
-                event.setName(strInput);
-                editEvent(event);
+                stringInput = input.next();
+                event.setName(stringInput);
+                editExcursion(event);
+                break;
+            case 3: System.out.println("Current Description: " + event.getDescription());
+                System.out.println("New Description: ");
+                stringInput = input.next();
+                event.setDescription(stringInput);
+                editExcursion(event);
+                break;
+            case 4: System.out.println("Current Start Time: " + event.getStartTime());
+                System.out.println("New Start Time: ");
+//                stringInput = input.next();
+//                event.setStartTime();
+                editExcursion(event);
+                break;
+            case 5: System.out.println("Current End Time: " + event.getEndTime());
+                System.out.println("New End Time: ");
+//                stringInput = input.next();
+//                event.setEndTime(stringInput);
+                editExcursion(event);
                 break;
             case 99: System.out.println("Are you sure you wish to delete this Event? \n 1: Yes \n Default: No");
                 intInput = input.nextInt();
@@ -159,7 +186,73 @@ public class Menu {
                 eventMenu();
                 break;
             case 111: Filehandling.addExportable((Exportable) currentRead);
-                editEvent(event);
+                editExcursion(event);
+                break;
+            case 112: Filehandling.executeExport();
+                startMenu();
+                break;
+            case 113: Filehandling.exportAll();
+                startMenu();
+                break;
+            case 0:
+                eventMenu();
+                break;
+        }
+
+    }
+
+    private static void editTransport(Event event){
+        currentRead.read();
+        intInput = input.nextInt();
+        switch (intInput){
+            case 1: System.out.println("Current name: " + event.getName());
+                System.out.println("New Name: ");
+                stringInput = input.next();
+                event.setName(stringInput);
+                editTransport(event);
+                break;
+            case 99: System.out.println("Are you sure you wish to delete this Event? \n 1: Yes \n Default: No");
+                intInput = input.nextInt();
+                if (intInput == 1){
+                    event.deleteEvent();
+                }
+                eventMenu();
+                break;
+            case 111: Filehandling.addExportable((Exportable) currentRead);
+                editTransport(event);
+                break;
+            case 112: Filehandling.executeExport();
+                startMenu();
+                break;
+            case 113: Filehandling.exportAll();
+                startMenu();
+                break;
+            case 0:
+                eventMenu();
+                break;
+        }
+
+    }
+
+    private static void editMeeting(Event event){
+        currentRead.read();
+        intInput = input.nextInt();
+        switch (intInput){
+            case 1: System.out.println("Current name: " + event.getName());
+                System.out.println("New Name: ");
+                stringInput = input.next();
+                event.setName(stringInput);
+                editMeeting(event);
+                break;
+            case 99: System.out.println("Are you sure you wish to delete this Event? \n 1: Yes \n Default: No");
+                intInput = input.nextInt();
+                if (intInput == 1){
+                    event.deleteEvent();
+                }
+                eventMenu();
+                break;
+            case 111: Filehandling.addExportable((Exportable) currentRead);
+                editMeeting(event);
                 break;
             case 112: Filehandling.executeExport();
                 startMenu();
@@ -176,7 +269,7 @@ public class Menu {
 
 
     private static void facilitatorMenu(){
-        System.out.println("Do you wish to create or edit an Facilitator? \n 1: Create \n 2: Edit \n 0: Return");
+        System.out.println("Do you wish to create or edit a Facilitator? \n 1: Create \n 2: Edit \n 0: Return");
         intInput = input.nextInt();
         switch (intInput){
             case 1: currentRead = new Facilitator();
@@ -193,20 +286,19 @@ public class Menu {
     }
 
     private static void editFacilitator(Facilitator facilitator){
-        System.out.println("Currently editing " + facilitator.getID());
-        System.out.println(" 1: ID \n 2: Name \n 99: Delete Facilitator \n 0: Return \n 111: Select for Export \n 112: Export Selected \n 113: Export All");
+        currentRead.read();
         intInput = input.nextInt();
         switch (intInput){
             case 1: System.out.println("Current ID: " + facilitator.getID());
                 System.out.println("New ID: ");
-                strInput = input.next();
-                facilitator.setID(strInput);
+                stringInput = input.next();
+                facilitator.setID(stringInput);
                 editFacilitator(facilitator);
                 break;
             case 2: System.out.println("Current name: " + facilitator.getName());
                 System.out.println("New Name: ");
-                strInput = input.next();
-                facilitator.setName(strInput);
+                stringInput = input.next();
+                facilitator.setName(stringInput);
                 editFacilitator(facilitator);
                 break;
             case 99: System.out.println("Are you sure you wish to delete this Facilitator? \n 1: Yes \n Default: No");

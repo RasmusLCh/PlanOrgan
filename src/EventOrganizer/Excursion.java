@@ -2,10 +2,14 @@ package EventOrganizer;
 
 public class Excursion extends Event {
 
+    // Readable Metoder
     @Override
     public void read() {
-
+        System.out.println("Currently editing " + getID()  + " within " + getArrangement().getName());
+        System.out.println(" 1: ID \n 2: Name \n 3: Description \n 4: Start Time \n 5: End Time \n 6: Facilitator \n 7: Comment \n 8: Location \n 9: Customer \n 11: Destination \n 99: Delete Event " + returnOptions + exportOptions);
     } //Fra Interface Readable, tillader objektet at blive læst
+
+    // Exportable Metoder
     @Override
     public void exportData() {
         Filehandling.writeToLine("ARRANGEMENT_" + getArrangement().getName(), "Transport," + getFacilitator().getName() + "," + getDescription() + "," + getStartTime() + "," + getEndTime() + "," + getComment() + "," + getLocation() + "," + getCustomer().getName() + "," + destination, getID());    } //Fra Interface Exportable, tillader objektet at blive eksporteret til en Arrangement fil

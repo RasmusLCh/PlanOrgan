@@ -4,21 +4,25 @@ import java.time.LocalDateTime;
 
 public class Arrangement implements Readable, Exportable {
 
+    // Readable Metoder
     @Override
     public void read() {
-
+        System.out.println("Currently editing " + name);
+        System.out.println("Currently slated price: " + getPrice());
+        System.out.println(" 1: Name \n 99: Delete Arrangement " + returnOptions + exportOptions);
     } //Fra Interface Readable, tillader objektet at blive læst
+
+    // Exportable Metoder
     @Override
     public void exportData() {
         Filehandling.writeToLine("ARRANGEMENT_" + name,startTime.toString() + "," + endTime.toString() + "," + getPrice(), 0);
-    } //Fra Interface Exportable, tillader objektet at blive eksporteret til en Arrangement fil
+    } // Tillader objektet at blive eksporteret til en Arrangement fil
     @Override
     public void importData() {
         Menu.setCurrentRead(this);
-    } //Fra Interface Exportable, tillader objektet at blive læst fra en Arrangement fil
+    } // Tillader objektet at blive læst fra en Arrangement fil
 
     private String name = "New Arrangement";
-    private float price = 0;
     private LocalDateTime startTime = LocalDateTime.now();  //LocalDateTime er en importeret klasse der holder styr på tid.
     private LocalDateTime endTime = LocalDateTime.now();
 
@@ -33,6 +37,7 @@ public class Arrangement implements Readable, Exportable {
         this.name = name;
     }
     public float getPrice() {
+        float price = 0;
         return price;
     }
     public LocalDateTime getStartTime() {

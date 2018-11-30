@@ -5,8 +5,11 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Filehandling {
 
@@ -55,9 +58,52 @@ public class Filehandling {
     } //Metode til at skrive til en specifik linje i en fil.
 
     /* Import sektion - Alt her er relevant for export af data */
+    private static File masterFile = new File ("files.txt");
     private static File readingFile;
+    private static String readingString;
+
 
     public static void setFile(File file){
-        readingFile = file;
+        masterFile = file;
     }
+
+    public static void importAll(){
+        DateTimeFormatter dTFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        try { Scanner masterScanner = new Scanner(masterFile);
+            while (masterScanner.hasNextLine()){
+                readingString = masterScanner.nextLine();
+                readingFile = new File(readingString + ".csv");
+                Scanner readingScanner = new Scanner(readingFile);
+                if (readingString.charAt(0) == 'F'){
+                    Facilitator tempFacilitator = new Facilitator();
+                    Menu.facilitators.add(tempFacilitator);
+                    tempFacilitator.setID(readingString.substring(12));
+                    tempFacilitator.setName(readingScanner.nextLine());
+                } else if(readingString.charAt(0) == 'A'){
+                    Arrangement tempArrangement = new Arrangement();
+                    Menu.arrangements.add(tempArrangement);
+                    tempArrangement.setName(readingString.substring(12));
+                    readingString = readingScanner.nextLine();
+                    String[] times = readingString.split(",");
+                    times[0] = times[0].replace('T', ' ');
+                    times[1] = times[1].replace('T', ' ');
+                    tempArrangement.setStartTime(LocalDateTime.parse(times[0].substring(0, 19), dTFormat));
+                    tempArrangement.setEndTime(LocalDateTime.parse(times[1].substring(0, 19) , dTFormat));
+                    while(readingScanner.hasNextLine()){
+
+                    }
+
+
+
+                } else if(readingString.charAt(0) == 'C'){}
+
+
+            }
+        } catch (FileNotFoundException fnfe) {}
+
+    }
+
+
+//    public void listF
+
 }

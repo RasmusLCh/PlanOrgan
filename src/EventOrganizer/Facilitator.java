@@ -4,10 +4,14 @@ import java.util.ArrayList;
 
 public class Facilitator implements Readable, Exportable {
 
+    // Readable Metoder
     @Override
     public void read() {
-
+        System.out.println("Currently editing " + ID);
+        System.out.println(" 1: ID \n 2: Name \n 99: Delete Facilitator " + returnOptions + exportOptions);
     } //Fra Interface Readable, tillader objektet at blive læst
+
+    // Exportable Metoder
     @Override
     public void exportData() {
         String arrangementList = "";
@@ -24,11 +28,11 @@ public class Facilitator implements Readable, Exportable {
     } //Fra Interface Exportable, tillader objektet at blive eksporteret til en Arrangement fil
     @Override
     public void importData() {
-        Menu.setCurrentRead(this);
+
     } //Fra Interface Exportable, tillader objektet at blive læst fra en Arrangement fil
 
-    private String ID;
-    private String name;
+    private String ID = "New Facilitator";
+    private String name= "John Smith";
     private ArrayList<Event> listOfEvents;
     private ArrayList<Arrangement> listOfArrangements;
 

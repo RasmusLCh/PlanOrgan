@@ -34,7 +34,7 @@ public class Facilitator implements Readable, Exportable {
 
     private String ID = "New Facilitator";
     private String name= "John Smith";
-    private ArrayList<Event> listOfEvents;
+    public ArrayList<Event> listOfEvents;
     private ArrayList<Arrangement> listOfArrangements;
 
     public Facilitator() {

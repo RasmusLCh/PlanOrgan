@@ -110,7 +110,9 @@ public class Event implements Readable, Exportable {
                 return;
             }
         }
-        System.out.println("There appears to be no facilitator with that ID. \n");
+        if(Menu.importDone) {
+            System.out.println("There appears to be no facilitator with that ID. \n");
+        }
     }
     public String getComment() {
         return comment;
@@ -143,7 +145,9 @@ public class Event implements Readable, Exportable {
                 return;
             }
         }
-        System.out.println("There appears to be no customer with that name. \n");
+        if (Menu.importDone){
+            System.out.println("There appears to be no customer with that name. \n");
+        }
     }
     public float calculatePrice(){
         float price = 0;

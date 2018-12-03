@@ -5,11 +5,12 @@ import java.util.Scanner;
 
 public class Menu {
 
-    static ArrayList<Facilitator> facilitators = new ArrayList<>();
-    static ArrayList<Arrangement> arrangements = new ArrayList<>();
-    static ArrayList<Event> events = new ArrayList<>();
-    static ArrayList<Customer> customers = new ArrayList<>();
+    public static ArrayList<Facilitator> facilitators = new ArrayList<>();
+    public static ArrayList<Arrangement> arrangements = new ArrayList<>();
+    public static ArrayList<Event> events = new ArrayList<>();
+    public static ArrayList<Customer> customers = new ArrayList<>();
 
+    static boolean importDone = false;
     private static int intInput;
     private static String stringInput;
     private static Scanner input = new Scanner(System.in);
@@ -17,6 +18,7 @@ public class Menu {
 
     public static void main(String[] args){
         Filehandling.importAll(); //Programmet starter med at importere alt information, for at at gøre det klar til at blive redigeret.
+        importDone = true;
         startMenu();
         return;
     }

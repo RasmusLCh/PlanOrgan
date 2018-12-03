@@ -135,7 +135,7 @@ public class Event implements Readable, Exportable {
     }
     public float calculatePrice(){
         float price = 0;
-        long duration = Duration.between((LocalDateTime.parse("2018-11-29 13:30:00", dTFormat)), LocalDateTime.now()).toMinutes();
+        long duration = Duration.between(startTime, endTime).toMinutes();
         price = 100;
         if (startTime.getDayOfWeek() == DayOfWeek.SATURDAY || startTime.getDayOfWeek() == DayOfWeek.SUNDAY){
             price += 350 * (duration / 30);

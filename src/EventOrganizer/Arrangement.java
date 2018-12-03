@@ -11,7 +11,7 @@ public class Arrangement implements Readable, Exportable {
     public void readEditInfo() {
         System.out.println("Currently editing " + name);
         System.out.println("Runs from " + getStartTime() + " to " + getEndTime());
-        System.out.println("Currently slated price: " + getPrice());
+        System.out.println("Currently slated price: " + getPrice() + " without VAT, or " + (getPrice() * 1.25 ) + " with VAT");
         System.out.println(" 1: Name \n 99: Delete Arrangement " + returnOptions + exportOptions);
     } //Fra Interface Readable, tillader objektet at blive læst af brugeren
 
@@ -33,7 +33,7 @@ public class Arrangement implements Readable, Exportable {
     public ArrayList<Event> listOfEvents = new ArrayList<>();
     private DateTimeFormatter dTFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private String name = "New Arrangement";
-    private LocalDateTime startTime = LocalDateTime.now();  //LocalDateTime er en importeret klasse der holder styr på tid.
+    private LocalDateTime startTime = LocalDateTime.now(); //LocalDateTime er en importeret klasse der holder styr på tid.
     private LocalDateTime endTime = LocalDateTime.now();
 
     public Arrangement() {

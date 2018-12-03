@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Filehandling {
 
-    private static File masterFile = new File ("files.txt");
+    private static final File masterFile = new File ("files.txt");
     private static File readingFile;
 
     /* Export sektion - Alt her er relevant for export af data */
@@ -57,6 +57,30 @@ public class Filehandling {
             Files.write(path, content, StandardCharsets.UTF_8);
         } catch (IOException ioe) { }
     } //Metode til at skrive til en specifik linje i en fil.
+    public static void writeToMaster (String data){
+        try {
+            masterFile.createNewFile(); // laver en ny fil hvis en af samme navn ikke allerede eksisterer. Retunerer en boolean som vi ikke bruger til noget.
+            Path path = Paths.get(masterFile.getName());
+            List<String> content = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
+            if(data.charAt(0) == 'A'){
+                content.add(data);
+            } else if(data.charAt(0) == 'C'){
+                for (int i = 0; i < content.size(); i++){
+                    if (content.get(i).charAt(0) == 'A'){
+                        content.add(i, data);
+                    }
+                }
+            } else if(data.charAt(0) == 'F'){
+                for (int i = 0; i < content.size(); i++){
+                    if (content.get(i).charAt(0) == 'C'){
+                        content.add(i, data);
+                    }
+                }
+            }
+            Files.write(path, content, StandardCharsets.UTF_8);
+        } catch (IOException ioe) { }
+    } //Metode til at skrive til filen der indeholder alle filnavne.
+
 
     /* Import sektion - Alt her er relevant for import af data */
     public static void importAll(){

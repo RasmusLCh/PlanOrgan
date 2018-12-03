@@ -31,6 +31,7 @@ public class Event implements Readable, Exportable {
         return this.ID;
     }
     public void setID(int ID){
+        deleteEvent();
         this.ID = ID;
     }
     public String getName(){
@@ -89,7 +90,7 @@ public class Event implements Readable, Exportable {
         if(facilitator != null){
             return facilitator.getID();
         } else {
-            System.out.println("Event " + getName() + " within arrangement " + getArrangement() + " does not have a set facilitator.");
+            System.out.println("Event " + getName() + " within arrangement " + getArrangement().getName() + " does not have a set facilitator.");
             return "";
         }
     }
@@ -122,7 +123,7 @@ public class Event implements Readable, Exportable {
         if(customer != null){
             return customer.getName();
         } else {
-            System.out.println("Event " + getName() + " within arrangement " + getArrangement() + " does not have a set customer.");
+            System.out.println("Event " + getName() + " within arrangement " + getArrangement().getName() + " does not have a set customer.");
             return "";
         }
     }

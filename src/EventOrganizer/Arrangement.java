@@ -18,6 +18,7 @@ public class Arrangement implements Readable, Exportable {
     // Exportable Metoder
     @Override
     public void exportData() { //UPDATE THIS / MASTERFILE
+        Filehandling.writeToMaster("ARRANGEMENT_" + name);
         Filehandling.writeToLine("ARRANGEMENT_" + name,startTime.toString() + "," + endTime.toString() + "," + getPrice(), 0);
     } // Tillader objektet at blive eksporteret til en Arrangement fil
     @Override

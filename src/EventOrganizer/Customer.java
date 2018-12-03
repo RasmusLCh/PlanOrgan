@@ -15,7 +15,7 @@ public class Customer implements Exportable, Readable {
     }
     @Override
     public void exportData() {
-
+        Filehandling.writeToMaster("CUSTOMER_" + name);
     }
     @Override
     public void importData(String data) {

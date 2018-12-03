@@ -284,7 +284,7 @@ public class Menu {
         stringInput = input.nextLine();
         switch (intInput){
             case 1: System.out.println("Current ID: " + event.getID());
-                System.out.println("New ID (numeric): ");
+                System.out.println("New ID (numeric only): ");
                 intInput = input.nextInt();
                 stringInput = input.nextLine();
                 event.setID(intInput);
@@ -381,7 +381,7 @@ public class Menu {
         stringInput = input.nextLine();
         switch (intInput){
             case 1: System.out.println("Current ID: " + event.getID());
-                System.out.println("New ID: ");
+                System.out.println("New ID (numeric only): ");
                 intInput = input.nextInt();
                 stringInput = input.nextLine();
                 event.setID(intInput);

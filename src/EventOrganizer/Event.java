@@ -54,6 +54,9 @@ public class Event implements Readable, Exportable {
     public String getStartTime() {
         String returnString = startTime.toString();
         returnString = returnString.replace('T', ' ');
+        if(returnString.length() == 16){    //Hvis sekunder ikke eksisterer i variablen, tilføjer vi den som 00
+            returnString += ":00";
+        }
         returnString = returnString.substring(0, 19);
         return returnString;
     }
@@ -68,6 +71,9 @@ public class Event implements Readable, Exportable {
     public String getEndTime() {
         String returnString = endTime.toString();
         returnString = returnString.replace('T', ' ');
+        if(returnString.length() == 16){    //Hvis sekunder ikke eksisterer i variablen, tilføjer vi den som 00
+            returnString += ":00";
+        }
         returnString = returnString.substring(0, 19);
         return returnString;
     }

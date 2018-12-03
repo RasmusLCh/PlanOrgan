@@ -44,15 +44,18 @@ public class Filehandling {
             readingFile.createNewFile(); // laver en ny fil hvis en af samme navn ikke allerede eksisterer. Retunerer en boolean som vi ikke bruger til noget.
             Path path = Paths.get(fileName + ".csv");
             List<String> content = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
+            System.out.println(content.get(0));
             if(content.size() < line + 1){
                 List<String> newLines = new ArrayList<>();
-                newLines.add("NO EVENT WITH THIS ID");
+//                newLines.add("NO EVENT WITH THIS ID");
                 for (int i = 0; i <= line; i++){
-                    newLines.add("NO EVENT WITH THIS ID");
+//                    newLines.add("NO EVENT WITH THIS ID");
                     content.add("NO EVENT WITH THIS ID");
                 }
-                Files.write(path, newLines, StandardCharsets.UTF_8); // Skriver i en fil, ved at bruge dens sti, det der skal stå i den, og et karakterset.
+//                Files.write(path, newLines, StandardCharsets.UTF_8); // Skriver i en fil, ved at bruge dens sti, det der skal stå i den, og et karakterset.
             }
+            System.out.println(text);
+            System.out.println(line);
             content.set(line, text);
             Files.write(path, content, StandardCharsets.UTF_8);
         } catch (IOException ioe) { }
@@ -62,19 +65,74 @@ public class Filehandling {
             masterFile.createNewFile(); // laver en ny fil hvis en af samme navn ikke allerede eksisterer. Retunerer en boolean som vi ikke bruger til noget.
             Path path = Paths.get(masterFile.getName());
             List<String> content = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
+            boolean alreadyExsits = false;
+            int start = 0;
+            int end = 0;
             if(data.charAt(0) == 'A'){
-                content.add(data);
+                for (int i = 0; i < content.size(); i++){
+                    if (content.get(i).charAt(0) == 'a'){
+                        start = i;
+                        break;
+                    }
+                }
+                for (int i = 0; i < content.size(); i++){
+                    if (content.get(i).charAt(0) == 'e'){
+                        end = i;
+                        break;
+                    }
+                }
+                for (int i = start; i < end; i++){
+                    if (content.get(i).equals(data)){
+                        alreadyExsits = true;
+                        break;
+                    }
+                }
+                if (!alreadyExsits){
+                    content.add(start + 1, data);
+                }
             } else if(data.charAt(0) == 'C'){
                 for (int i = 0; i < content.size(); i++){
-                    if (content.get(i).charAt(0) == 'A'){
-                        content.add(i, data);
+                    if (content.get(i).charAt(0) == 'c'){
+                        start = i;
+                        break;
                     }
+                }
+                for (int i = 0; i < content.size(); i++){
+                    if (content.get(i).charAt(0) == 'a'){
+                        end = i;
+                        break;
+                    }
+                }
+                for (int i = start; i < end; i++){
+                    if (content.get(i).equals(data)){
+                        alreadyExsits = true;
+                        break;
+                    }
+                }
+                if (!alreadyExsits){
+                    content.add(start + 1, data);
                 }
             } else if(data.charAt(0) == 'F'){
                 for (int i = 0; i < content.size(); i++){
-                    if (content.get(i).charAt(0) == 'C'){
-                        content.add(i, data);
+                    if (content.get(i).charAt(0) == 'f'){
+                        start = i;
+                        break;
                     }
+                }
+                for (int i = 0; i < content.size(); i++){
+                    if (content.get(i).charAt(0) == 'c'){
+                        end = i;
+                        break;
+                    }
+                }
+                for (int i = start; i < end; i++){
+                    if (content.get(i).equals(data)){
+                        alreadyExsits = true;
+                        break;
+                    }
+                }
+                if (!alreadyExsits){
+                    content.add(start +1, data);
                 }
             }
             Files.write(path, content, StandardCharsets.UTF_8);
@@ -84,21 +142,22 @@ public class Filehandling {
 
     /* Import sektion - Alt her er relevant for import af data */
     public static void importAll(){
-        int linecount = 0; //Int til at tælle den nuværende linje, bliver brugt til at afgøre ID for Events
         String readingString; //Den nuværende linje der bliver læst
-        try { Scanner masterScanner = new Scanner(masterFile);
+        try {Scanner masterScanner = new Scanner(masterFile);
             while (masterScanner.hasNextLine()){ // Går igennem masterFile så længe der er flere linjer.
                 readingString = masterScanner.nextLine();
-                readingFile = new File(readingString + ".csv"); //Baseret på linjen finder den en fil til at læse.
-                Scanner readingScanner = new Scanner(readingFile);
                 if (readingString.charAt(0) == 'F'){ //Hvis første bogstav på linjen er F er information om en Facilitator
-                    Facilitator newFacilitator = new Facilitator();
+                    readingFile = new File(readingString + ".csv"); //Baseret på linjen finder den en fil til at læse.
+                    Scanner readingScanner = new Scanner(readingFile);                    Facilitator newFacilitator = new Facilitator();
                     newFacilitator.setID(readingString.substring(12));
                     newFacilitator.setName(readingScanner.nextLine()); //Information om Events og Arrangementer bliver tilføjet til en faciliatotor gennem Event's ImportData
                 } else if(readingString.charAt(0) == 'C'){ //Hvis første bogstav på linjen er C er information om en Customer
                     new Customer(readingString.substring(9)); // Det nye Customer objekt bliver ikke gemt i en attribut/variabel, da vi kun har brug for at oprette den
                     //Information om Events og Arrangementer bliver tilføjet til en customer gennem Event's ImportData
                 } else if(readingString.charAt(0) == 'A'){ //Hvis første bogstav på linjen er A er information om et Arrangement
+                    int linecount = 0; //Int til at tælle den nuværende linje, bliver brugt til at afgøre ID for Events
+                    readingFile = new File(readingString + ".csv"); //Baseret på linjen finder den en fil til at læse.
+                    Scanner readingScanner = new Scanner(readingFile);
                     Arrangement newArrangement = new Arrangement();
                     newArrangement.setName(readingString.substring(12));
                     readingString = readingScanner.nextLine();
@@ -108,9 +167,12 @@ public class Filehandling {
                         readingString = readingScanner.nextLine();
                         Event newEvent;
                         if(readingString.charAt(0) == 'E'){
+                            System.out.println("Excursion");
                             newEvent = new Excursion(newArrangement);
                             newEvent.importData(readingString); //importData i det nye objekt bliver kaldet, hvilket sætter alle variabler op
                             newEvent.setID(linecount);
+                            System.out.println(newEvent.getName());
+
                         } else if(readingString.charAt(0) == 'T'){
                             newEvent = new Transport(newArrangement);
                             newEvent.importData(readingString); //importData i det nye objekt bliver kaldet, hvilket sætter alle variabler op

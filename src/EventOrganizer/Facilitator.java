@@ -14,7 +14,7 @@ public class Facilitator implements Readable, Exportable {
     // Exportable Metoder
     @Override
     public void exportData() { //UPDATE THIS / MASTERFILE
-        Filehandling.writeToMaster("FACILITATOR" + ID);
+        Filehandling.writeToMaster("FACILITATOR_" + ID);
         String arrangementList = "";
         for (int i = 0; i < listOfArrangements.size(); i++){
             arrangementList += listOfArrangements.get(i).getName() + ",";

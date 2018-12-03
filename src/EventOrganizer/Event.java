@@ -31,7 +31,6 @@ public class Event implements Readable, Exportable {
         return this.ID;
     }
     public void setID(int ID){
-        deleteEvent();
         this.ID = ID;
     }
     public String getName(){

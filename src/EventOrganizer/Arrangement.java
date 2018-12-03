@@ -66,6 +66,9 @@ public class Arrangement implements Readable, Exportable {
     }
     public void setStartTime(String startTime) {
         startTime = startTime.replace('T', ' ');
+        if(startTime.length() == 16){    //Hvis sekunder ikke eksisterer i variablen, tilføjer vi den som 00
+            startTime += ":00";
+        }
         this.startTime = (LocalDateTime.parse(startTime.substring(0, 19), dTFormat));
     }
     public String getEndTime() {
@@ -79,6 +82,9 @@ public class Arrangement implements Readable, Exportable {
     }
     public void setEndTime(String endTime) {
         endTime = endTime.replace('T', ' ');
+        if(endTime.length() == 16){    //Hvis sekunder ikke eksisterer i variablen, tilføjer vi den som 00
+            endTime += ":00";
+        }
         this.endTime = (LocalDateTime.parse(endTime.substring(0, 19), dTFormat));
     }
 

@@ -6,14 +6,14 @@ public class Facilitator implements Readable, Exportable {
 
     // Readable Metoder
     @Override
-    public void read() {
+    public void readEditInfo() {
         System.out.println("Currently editing " + ID);
         System.out.println(" 1: ID \n 2: Name \n 99: Delete Facilitator " + returnOptions + exportOptions);
-    } //Fra Interface Readable, tillader objektet at blive læst
+    } //Fra Interface Readable, tillader objektet at blive læst af brugeren
 
     // Exportable Metoder
     @Override
-    public void exportData() {
+    public void exportData() { //UPDATE THIS / MASTERFILE
         String arrangementList = "";
         for (int i = 0; i < listOfArrangements.size(); i++){
             arrangementList += listOfArrangements.get(i).getName() + ",";
@@ -27,9 +27,9 @@ public class Facilitator implements Readable, Exportable {
         Filehandling.writeToLine("FACILITATOR_" + ID, eventList, 2);
     } //Fra Interface Exportable, tillader objektet at blive eksporteret til en Arrangement fil
     @Override
-    public void importData() {
+    public void importData(String data) {
 
-    } //Fra Interface Exportable, tillader objektet at blive læst fra en Arrangement fil
+    } //Fra Interface Exportable, tillader objektet at blive oprettet fra en Facilitator fil
 
     private String ID = "New Facilitator";
     private String name= "John Smith";
@@ -38,6 +38,7 @@ public class Facilitator implements Readable, Exportable {
 
     public Facilitator() {
         Filehandling.autoAddExportable(this);
+        Menu.facilitators.add(this);
         listOfEvents = new ArrayList<>();
         listOfArrangements = new ArrayList<>();
     }
@@ -70,12 +71,13 @@ public class Facilitator implements Readable, Exportable {
             listOfArrangements.add(event.getArrangement());
         }
     } //Tilføjer et event til facilitators liste, plus det tilhørende arrangement, hvis det ikke allerede er på.
+    public void removeFromEventList(Event event){} //UPDATE THIS
     public ArrayList<Arrangement> getListOfArrangements(){
         return listOfArrangements;
     }
 
     public void deleteFacilitator(){
         //find filen, og slet den
-    }
+    } //UPDATE THIS
 
 }

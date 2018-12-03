@@ -1,33 +1,44 @@
 package EventOrganizer;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Arrangement implements Readable, Exportable {
 
     // Readable Metoder
     @Override
-    public void read() {
+    public void readEditInfo() {
         System.out.println("Currently editing " + name);
+        System.out.println("Runs from " + getStartTime() + " to " + getEndTime());
         System.out.println("Currently slated price: " + getPrice());
         System.out.println(" 1: Name \n 99: Delete Arrangement " + returnOptions + exportOptions);
-    } //Fra Interface Readable, tillader objektet at blive læst
+    } //Fra Interface Readable, tillader objektet at blive læst af brugeren
 
     // Exportable Metoder
     @Override
-    public void exportData() {
+    public void exportData() { //UPDATE THIS / MASTERFILE
         Filehandling.writeToLine("ARRANGEMENT_" + name,startTime.toString() + "," + endTime.toString() + "," + getPrice(), 0);
     } // Tillader objektet at blive eksporteret til en Arrangement fil
     @Override
-    public void importData() {
-        Menu.setCurrentRead(this);
-    } // Tillader objektet at blive læst fra en Arrangement fil
+    public void importData(String data) {
+        String[] times = data.split(",");
+        times[0] = times[0].replace('T', ' ');
+        times[1] = times[1].replace('T', ' ');
+        setStartTime(times[0]);
+        setEndTime(times[1]);
 
+    } // Tillader objektet at blive oprettet fra en Arrangement fil
+
+    public ArrayList<Event> listOfEvents = new ArrayList<>();
+    private DateTimeFormatter dTFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private String name = "New Arrangement";
     private LocalDateTime startTime = LocalDateTime.now();  //LocalDateTime er en importeret klasse der holder styr på tid.
     private LocalDateTime endTime = LocalDateTime.now();
 
     public Arrangement() {
         Filehandling.autoAddExportable(this);
+        Menu.arrangements.add(this);
     }
 
     public String getName() {
@@ -38,22 +49,33 @@ public class Arrangement implements Readable, Exportable {
     }
     public float getPrice() {
         float price = 0;
+        for(int i = 0; i < listOfEvents.size(); i++){
+            price += listOfEvents.get(i).calculatePrice();
+        }
         return price;
     }
-    public LocalDateTime getStartTime() {
-        return startTime;
+    public String getStartTime() {
+        String returnString = startTime.toString();
+        returnString = returnString.replace('T', ' ');
+        returnString = returnString.substring(0, 19);
+        return returnString;
     }
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
+    public void setStartTime(String startTime) {
+        startTime = startTime.replace('T', ' ');
+        this.startTime = (LocalDateTime.parse(startTime.substring(0, 19), dTFormat));
     }
-    public LocalDateTime getEndTime() {
-        return endTime;
+    public String getEndTime() {
+        String returnString = endTime.toString();
+        returnString = returnString.replace('T', ' ');
+        returnString = returnString.substring(0, 19);
+        return returnString;
     }
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
+    public void setEndTime(String endTime) {
+        endTime = endTime.replace('T', ' ');
+        this.endTime = (LocalDateTime.parse(endTime.substring(0, 19), dTFormat));
     }
 
     public void deleteArrangement(){
-    }        //finder arrangement filen, og sletter den
+    } //UPDATE THIS       //finder arrangement filen, og sletter den
 
 }

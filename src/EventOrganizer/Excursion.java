@@ -12,7 +12,7 @@ public class Excursion extends Event {
     // Exportable Metoder
     @Override
     public void exportData() {
-        Filehandling.writeToLine("ARRANGEMENT_" + getArrangement().getName(), "Excursion," + getName() + "," + getFacilitator() + "," + getDescription() + "," + getStartTime() + "," + getEndTime() + "," + getComment() + "," + getLocation() + "," + getCustomer() + "," + destination, getID());
+        Filehandling.writeToLine("ARRANGEMENT_" + getArrangement().getName(), "Excursion," + getName() + "," + getFacilitator() + "," + getDescription() + "," + getStartTime() + "," + getEndTime() + "," + getComment() + "," + getLocation() + "," + getCustomer() + "," + destination  + ",", getID());
     } //Fra Interface Exportable, tillader objektet at blive eksporteret til en Arrangement fil
     @Override
     public void importData(String data) {
@@ -33,11 +33,11 @@ public class Excursion extends Event {
         setDestination(eventData[9]);
     } //Fra Interface Exportable, tillader objektet at blive oprettet fra en Arrangement fil
 
-    private String destination = " ";
+    private String destination = "Destination";
 
     public Excursion(Arrangement arrangement) {
         setArrangement(arrangement);
-        arrangement.listOfEvents.add(this);
+        arrangement.getEventList().add(this);
         Filehandling.autoAddExportable(this);
         Menu.events.add(this);
     }

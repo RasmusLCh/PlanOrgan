@@ -86,6 +86,18 @@ public class Menu {
                 arrangement.setName(stringInput);
                 editArrangement(arrangement);
                 break;
+            case 2: System.out.println("Current Start Time: " + arrangement.getStartTime());
+                System.out.println("New Start Time Date (please input as yyyy-mm-dd hh:mm:ss): ");
+                stringInput = input.nextLine();
+                arrangement.setStartTime(stringInput);
+                editArrangement(arrangement);
+                break;
+            case 3: System.out.println("Current End Time: " + arrangement.getEndTime());
+                System.out.println("New End Time Date (please input as yyyy-mm-dd hh:mm:ss): ");
+                stringInput = input.nextLine();
+                arrangement.setEndTime(stringInput);
+                editArrangement(arrangement);
+                break;
             case 99: System.out.println("Are you sure you wish to delete this Arrangement, and all of its associated events? \n 1: Yes \n Default: No");
                 intInput = input.nextInt();
                 stringInput = input.nextLine();
@@ -513,6 +525,9 @@ public class Menu {
                 facilitator.setName(stringInput);
                 editFacilitator(facilitator);
                 break;
+            case 3: facilitator.getEvents();
+                editFacilitator(facilitator);
+                break;
             case 99: System.out.println("Are you sure you wish to delete this Facilitator? \n 1: Yes \n Default: No");
                 intInput = input.nextInt();
                 stringInput = input.nextLine();
@@ -578,7 +593,7 @@ public class Menu {
         stringInput = input.nextLine();
         switch (intInput){
             case 1: customer.getEvents();
-                customerMenu();
+                editCustomer(customer);
                 break;
             case 99: System.out.println("Are you sure you wish to delete this Customer? \n 1: Yes \n Default: No");
                 intInput = input.nextInt();

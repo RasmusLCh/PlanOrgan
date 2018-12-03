@@ -12,7 +12,7 @@ public class Transport extends Event {
     // Exportable Metoder
     @Override
     public void exportData() {
-        Filehandling.writeToLine("ARRANGEMENT_" + getArrangement().getName(), "Transport," + getName() + "," + getFacilitator() + "," + getDescription() + "," + getStartTime() + "," + getEndTime() + "," + getComment() + "," + getLocation() + "," + getCustomer() + "," + destination + "," + vehicle, getID());
+        Filehandling.writeToLine("ARRANGEMENT_" + getArrangement().getName(), "Transport," + getName() + "," + getFacilitator() + "," + getDescription() + "," + getStartTime() + "," + getEndTime() + "," + getComment() + "," + getLocation() + "," + getCustomer() + "," + destination + "," + vehicle + ",", getID());
     } //Fra Interface Exportable, tillader objektet at blive eksporteret til en Arrangement fil
     @Override
     public void importData(String data) {
@@ -34,12 +34,12 @@ public class Transport extends Event {
         setVehicle(eventData[10]);
     } //Fra Interface Exportable, tillader objektet at blive oprettet fra en Arrangement fil
 
-    private String destination = " ";
-    private String vehicle = " ";
+    private String destination = "Destionation";
+    private String vehicle = "Vehicle";
 
     public Transport(Arrangement arrangement) {
         setArrangement(arrangement);
-        arrangement.listOfEvents.add(this);
+        arrangement.getEventList().add(this);
         Filehandling.autoAddExportable(this);
         Menu.events.add(this);
     }

@@ -12,14 +12,14 @@ public class Arrangement implements Readable, Exportable {
         System.out.println("Currently editing " + name);
         System.out.println("Runs from " + getStartTime() + " to " + getEndTime());
         System.out.println("Currently slated price: " + getPrice() + " without VAT, or " + (getPrice() * 1.25 ) + " with VAT");
-        System.out.println(" 1: Name \n 99: Delete Arrangement " + returnOptions + exportOptions);
+        System.out.println(" 1: Name \n 2: Start Time \n 3: End Time \n 99: Delete Arrangement " + returnOptions + exportOptions);
     } //Fra Interface Readable, tillader objektet at blive læst af brugeren
 
     // Exportable Metoder
     @Override
     public void exportData() { //UPDATE THIS / MASTERFILE
         Filehandling.writeToMaster("ARRANGEMENT_" + name);
-        Filehandling.writeToLine("ARRANGEMENT_" + name,startTime.toString() + "," + endTime.toString() + "," + getPrice(), 0);
+        Filehandling.writeToLine("ARRANGEMENT_" + name,getStartTime() + "," + getEndTime() + "," + getPrice(), 0);
     } // Tillader objektet at blive eksporteret til en Arrangement fil
     @Override
     public void importData(String data) {
@@ -31,9 +31,9 @@ public class Arrangement implements Readable, Exportable {
 
     } // Tillader objektet at blive oprettet fra en Arrangement fil
 
-    public ArrayList<Event> listOfEvents = new ArrayList<>();
     private DateTimeFormatter dTFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private String name = "New Arrangement";
+    private ArrayList<Event> listOfEvents = new ArrayList<>();
     private LocalDateTime startTime = LocalDateTime.now(); //LocalDateTime er en importeret klasse der holder styr på tid.
     private LocalDateTime endTime = LocalDateTime.now();
 
@@ -48,12 +48,8 @@ public class Arrangement implements Readable, Exportable {
     public void setName(String name) {
         this.name = name;
     }
-    public float getPrice() {
-        float price = 0;
-        for(int i = 0; i < listOfEvents.size(); i++){
-            price += listOfEvents.get(i).calculatePrice();
-        }
-        return price;
+    public ArrayList getEventList (){
+        return listOfEvents;
     }
     public String getStartTime() {
         String returnString = startTime.toString();
@@ -69,7 +65,11 @@ public class Arrangement implements Readable, Exportable {
         if(startTime.length() == 16){    //Hvis sekunder ikke eksisterer i variablen, tilføjer vi den som 00
             startTime += ":00";
         }
-        this.startTime = (LocalDateTime.parse(startTime.substring(0, 19), dTFormat));
+        if(startTime.charAt(4) == '-' && startTime.charAt(7) == '-' && startTime.charAt(10) == ' ' && startTime.charAt(13) == ':' && startTime.charAt(16) == ':') {
+            this.startTime = (LocalDateTime.parse(startTime.substring(0, 19), dTFormat));
+        } else {
+            System.out.println(startTime + " is not a valid time.");
+        }
     }
     public String getEndTime() {
         String returnString = endTime.toString();
@@ -85,7 +85,18 @@ public class Arrangement implements Readable, Exportable {
         if(endTime.length() == 16){    //Hvis sekunder ikke eksisterer i variablen, tilføjer vi den som 00
             endTime += ":00";
         }
-        this.endTime = (LocalDateTime.parse(endTime.substring(0, 19), dTFormat));
+        if(endTime.charAt(4) == '-' && endTime.charAt(7) == '-' && endTime.charAt(10) == ' ' && endTime.charAt(13) == ':' && endTime.charAt(16) == ':') {
+            this.endTime = (LocalDateTime.parse(endTime.substring(0, 19), dTFormat));
+        } else {
+            System.out.println(endTime + " is not a valid time.");
+        }
+    }
+    public float getPrice() {
+        float price = 0;
+        for(int i = 0; i < listOfEvents.size(); i++){
+            price += listOfEvents.get(i).calculatePrice();
+        }
+        return price;
     }
 
     public void deleteArrangement(){

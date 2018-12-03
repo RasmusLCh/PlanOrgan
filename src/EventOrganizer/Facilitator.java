@@ -8,7 +8,7 @@ public class Facilitator implements Readable, Exportable {
     @Override
     public void readEditInfo() {
         System.out.println("Currently editing " + ID);
-        System.out.println(" 1: ID \n 2: Name \n 99: Delete Facilitator " + returnOptions + exportOptions);
+        System.out.println(" 1: ID \n 2: Name \n 3: Check all associated events \n 99: Delete Facilitator " + returnOptions + exportOptions);
     } //Fra Interface Readable, tillader objektet at blive læst af brugeren
 
     // Exportable Metoder
@@ -56,9 +56,13 @@ public class Facilitator implements Readable, Exportable {
     public void setName(String name) {
         this.name = name;
     }
-    public ArrayList<Event> getListOfEvents(){
-        return listOfEvents;
-    }
+    public void getEvents(){
+        System.out.println(ID + " participates in:");
+        for (int i = 0; i < listOfEvents.size(); i++){
+            System.out.println(listOfEvents.get(i).getName() + " within the arrangement " + listOfEvents.get(i).getArrangement().getName());
+        }
+        System.out.println("\n");
+    } // fortæller alle events en facilitator er med i.
     public void addToEventList(Event event){
         listOfEvents.add(event);
         boolean alreadyExists = false;
@@ -72,7 +76,19 @@ public class Facilitator implements Readable, Exportable {
             listOfArrangements.add(event.getArrangement());
         }
     } //Tilføjer et event til facilitators liste, plus det tilhørende arrangement, hvis det ikke allerede er på.
-    public void removeFromEventList(Event event){} //UPDATE THIS
+    public void removeFromEventList(Event event){
+        listOfEvents.remove(event);
+        boolean keepArrangement = false;
+        for(int i = 0; i < listOfEvents.size(); i++){
+            if(listOfEvents.get(i).getArrangement() == event.getArrangement()){
+                keepArrangement = true;
+                break;
+            }
+        }
+        if(!keepArrangement){
+            listOfArrangements.remove(event.getArrangement());
+        }
+    } //Fjerner et event fra listen, og det tilhørende Arrangement hvis det ikke er over andre events.
     public ArrayList<Arrangement> getListOfArrangements(){
         return listOfArrangements;
     }

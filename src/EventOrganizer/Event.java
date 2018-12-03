@@ -23,8 +23,8 @@ public class Event implements Readable, Exportable {
     private LocalDateTime startTime = LocalDateTime.now(); //LocalDateTime er en importeret klasse der holder styr på tid.
     private LocalDateTime endTime = LocalDateTime.now();
     private Facilitator facilitator = null;
-    private String comment = " ";
-    private String location = " ";
+    private String comment = "Comment";
+    private String location = "Location";
     private Customer customer = null;
 
     public int getID(){
@@ -62,6 +62,9 @@ public class Event implements Readable, Exportable {
     }
     public void setStartTime(String startTime) {
         startTime = startTime.replace('T', ' ');
+        if(startTime.length() == 16){    //Hvis sekunder ikke eksisterer i variablen, tilføjer vi den som 00
+            startTime += ":00";
+        }
         if(startTime.charAt(4) == '-' && startTime.charAt(7) == '-' && startTime.charAt(10) == ' ' && startTime.charAt(13) == ':' && startTime.charAt(16) == ':') {
             this.startTime = (LocalDateTime.parse(startTime.substring(0, 19), dTFormat));
         } else {
@@ -79,6 +82,9 @@ public class Event implements Readable, Exportable {
     }
     public void setEndTime(String endTime) {
         endTime = endTime.replace('T', ' ');
+        if(endTime.length() == 16){    //Hvis sekunder ikke eksisterer i variablen, tilføjer vi den som 00
+            endTime += ":00";
+        }
         if(endTime.charAt(4) == '-' && endTime.charAt(7) == '-' && endTime.charAt(10) == ' ' && endTime.charAt(13) == ':' && endTime.charAt(16) == ':') {
             this.endTime = (LocalDateTime.parse(endTime.substring(0, 19), dTFormat));
         } else {
@@ -160,6 +166,7 @@ public class Event implements Readable, Exportable {
     public void deleteEvent(){
         Filehandling.writeToLine( "ARRANGEMENT_" + getArrangement().getName(), "NO EVENT WITH THIS ID", ID);
         Menu.events.remove(this);
+        Filehandling.removeExportable(this);
     } //finder den relevante arrangement fil, og sletter information, kun om dette event, ved at erstatte linjen
 
 

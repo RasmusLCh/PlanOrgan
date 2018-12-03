@@ -12,7 +12,7 @@ public class Meeting extends Event {
     // Exportable Metoder
     @Override
     public void exportData() {
-        Filehandling.writeToLine("ARRANGEMENT_" + getArrangement().getName(), "Meeting," + getName() + "," + getFacilitator() + "," + getDescription() + "," + getStartTime() + "," + getEndTime() + "," + getComment() + "," + getLocation() + "," + getCustomer() + "," + equipment, getID());
+        Filehandling.writeToLine("ARRANGEMENT_" + getArrangement().getName(), "Meeting," + getName() + "," + getFacilitator() + "," + getDescription() + "," + getStartTime() + "," + getEndTime() + "," + getComment() + "," + getLocation() + "," + getCustomer() + "," + equipment + ",", getID());
     } // Tillader objektet at blive eksporteret til en Arrangement fil
     @Override
     public void importData(String data) {
@@ -33,11 +33,11 @@ public class Meeting extends Event {
         setEquipment(eventData[9]);
     } // Tillader objektet at blive oprettet fra en Arrangement fil
 
-    private String equipment = " ";
+    private String equipment = "Equipment";
 
     public Meeting(Arrangement arrangement) {
         setArrangement(arrangement);
-        arrangement.listOfEvents.add(this);
+        arrangement.getEventList().add(this);
         Filehandling.autoAddExportable(this);
         Menu.events.add(this);
     }

@@ -21,9 +21,6 @@ public class Filehandling {
     public static void addExportable(Exportable exportable){
         selectedExports.add(exportable);
     } //metode der tilføjer et objekt til den selektive liste.
-    public static void removeExportable(Exportable exportable){
-        selectedExports.remove(exportable);
-    } //metode der fjerner et objekt fra den selektive liste.
     public static void executeExport(){
         for (int i = 0; i < selectedExports.size(); i++){
             selectedExports.get(i).exportData();
@@ -37,6 +34,10 @@ public class Filehandling {
             allExports.get(i).exportData();
         }
     } //Exporterer alle objekter i allExports listen.
+    public static void removeExportable(Exportable exportable){
+        selectedExports.remove(exportable);
+        allExports.remove(exportable);
+    } //metode der fjerner et objekt fra den begge lister.
 
     public static void writeToLine(String fileName, String text, int line) {
         readingFile = new File(fileName + ".csv");

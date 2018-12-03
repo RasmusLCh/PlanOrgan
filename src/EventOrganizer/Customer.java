@@ -22,7 +22,7 @@ public class Customer implements Exportable, Readable {
 
     }
 
-    public Customer (String name){
+    public Customer (String name) {
         this.name = name;
         Menu.customers.add(this);
         listOfEvents = new ArrayList<>();
@@ -33,7 +33,7 @@ public class Customer implements Exportable, Readable {
         return name;
     }
 
-    public void getEvents(){
+    public void getEvents() {
         System.out.println(name + " participates in:");
         for (int i = 0; i < listOfEvents.size(); i++){
             System.out.println(listOfEvents.get(i).getName() + " within the arrangement " + listOfEvents.get(i).getArrangement().getName());
@@ -53,8 +53,19 @@ public class Customer implements Exportable, Readable {
             listOfArrangements.add(event.getArrangement());
         }
     }
-    public void removeFromEventList(Event event){} //UPDATE THIS
-
+    public void removeFromEventList(Event event){
+        listOfEvents.remove(event);
+        boolean keepArrangement = false;
+        for(int i = 0; i < listOfEvents.size(); i++){
+            if(listOfEvents.get(i).getArrangement() == event.getArrangement()){
+                keepArrangement = true;
+                break;
+            }
+        }
+        if(!keepArrangement){
+            listOfArrangements.remove(event.getArrangement());
+        }
+    } //Fjerner et event fra listen, og det tilhørende Arrangement hvis det ikke er over andre events.
 
     public void deleteCustomer() {
 

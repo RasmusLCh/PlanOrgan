@@ -44,7 +44,6 @@ public class Filehandling {
             readingFile.createNewFile(); // laver en ny fil hvis en af samme navn ikke allerede eksisterer. Retunerer en boolean som vi ikke bruger til noget.
             Path path = Paths.get(fileName + ".csv");
             List<String> content = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
-            System.out.println(content.get(0));
             if(content.size() < line + 1){
                 List<String> newLines = new ArrayList<>();
 //                newLines.add("NO EVENT WITH THIS ID");
@@ -54,8 +53,6 @@ public class Filehandling {
                 }
 //                Files.write(path, newLines, StandardCharsets.UTF_8); // Skriver i en fil, ved at bruge dens sti, det der skal stå i den, og et karakterset.
             }
-            System.out.println(text);
-            System.out.println(line);
             content.set(line, text);
             Files.write(path, content, StandardCharsets.UTF_8);
         } catch (IOException ioe) { }
@@ -167,12 +164,9 @@ public class Filehandling {
                         readingString = readingScanner.nextLine();
                         Event newEvent;
                         if(readingString.charAt(0) == 'E'){
-                            System.out.println("Excursion");
                             newEvent = new Excursion(newArrangement);
                             newEvent.importData(readingString); //importData i det nye objekt bliver kaldet, hvilket sætter alle variabler op
                             newEvent.setID(linecount);
-                            System.out.println(newEvent.getName());
-
                         } else if(readingString.charAt(0) == 'T'){
                             newEvent = new Transport(newArrangement);
                             newEvent.importData(readingString); //importData i det nye objekt bliver kaldet, hvilket sætter alle variabler op

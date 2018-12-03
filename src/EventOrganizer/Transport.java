@@ -5,7 +5,7 @@ public class Transport extends Event {
     // Readable Metoder
     @Override
     public void readEditInfo() {
-//        System.out.println("Currently editing " + getName() + " within " + getArrangement().getName());
+        System.out.println("Currently editing " + getName() + " within " + getArrangement().getName());
         System.out.println(" 1: ID \n 2: Name \n 3: Description \n 4: Start Time \n 5: End Time \n 6: Facilitator \n 7: Comment \n 8: Location \n 9: Customer \n 11: Destination \n 12: Vehicle \n 99: Delete Event " + returnOptions + exportOptions);
     } //Fra Interface Readable, tillader objektet at blive læst af brugeren
 
@@ -34,8 +34,8 @@ public class Transport extends Event {
         setVehicle(eventData[10]);
     } //Fra Interface Exportable, tillader objektet at blive oprettet fra en Arrangement fil
 
-    private String destination = "";
-    private String vehicle = "";
+    private String destination = " ";
+    private String vehicle = " ";
 
     public Transport(Arrangement arrangement) {
         setArrangement(arrangement);

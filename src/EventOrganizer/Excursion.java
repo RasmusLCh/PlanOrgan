@@ -33,7 +33,7 @@ public class Excursion extends Event {
         setDestination(eventData[9]);
     } //Fra Interface Exportable, tillader objektet at blive oprettet fra en Arrangement fil
 
-    private String destination = "";
+    private String destination = " ";
 
     public Excursion(Arrangement arrangement) {
         setArrangement(arrangement);

@@ -33,7 +33,7 @@ public class Meeting extends Event {
         setEquipment(eventData[9]);
     } // Tillader objektet at blive oprettet fra en Arrangement fil
 
-    private String equipment;
+    private String equipment = " ";
 
     public Meeting(Arrangement arrangement) {
         setArrangement(arrangement);

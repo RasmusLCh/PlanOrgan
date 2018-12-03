@@ -24,7 +24,6 @@ public class Menu {
 
     private static void startMenu(){
         System.out.println("What do you wish to work with? \n 1: Arrangements \n 2: Events \n 3: Facilitators \n 4: Customers \n 0: Exit");
-        System.out.println(events.size());
         intInput = input.nextInt();
         stringInput = input.nextLine();
         switch (intInput){

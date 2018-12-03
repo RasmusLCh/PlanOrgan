@@ -23,9 +23,9 @@ public class Event implements Readable, Exportable {
     private LocalDateTime startTime = LocalDateTime.now(); //LocalDateTime er en importeret klasse der holder styr på tid.
     private LocalDateTime endTime = LocalDateTime.now();
     private Facilitator facilitator = null;
-    private String comment = "";
-    private String location = "";
-    private Customer customer;
+    private String comment = " ";
+    private String location = " ";
+    private Customer customer = null;
 
     public int getID(){
         return this.ID;

@@ -53,7 +53,7 @@ public class Customer implements Exportable, Readable {
         if(!alreadyExists){
             listOfArrangements.add(event.getArrangement());
         }
-    }
+    } //Tilføjer et event til liste, plus det tilhørende arrangement, hvis det ikke allerede er på.
     public void removeFromEventList(Event event){
         listOfEvents.remove(event);
         boolean keepArrangement = false;
@@ -69,8 +69,8 @@ public class Customer implements Exportable, Readable {
     } //Fjerner et event fra listen, og det tilhørende Arrangement hvis det ikke er over andre events.
 
     public void deleteCustomer() {
-        Menu.customers.remove(this);
-        Filehandling.deleteFromMaster("CUSTOMER_" + name);
-    } //UPDATE THIS
+        Menu.customers.remove(this); // fjerner fra customer listen
+        Filehandling.deleteFromMaster("CUSTOMER_" + name); // sletter linje fra masterFile om customer
+    }
 
 }

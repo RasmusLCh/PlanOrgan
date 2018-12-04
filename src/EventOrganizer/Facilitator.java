@@ -48,7 +48,7 @@ public class Facilitator implements Readable, Exportable {
         return ID;
     }
     public void setID(String ID) {
-        Filehandling.deleteFile("FACILITATOR_" + ID); // Sletter den gamle fil når ID bliver ændret, fordi ID afgør filnavn
+        Filehandling.deleteFile("FACILITATOR_" + this.ID); // Sletter den gamle fil når ID bliver ændret, fordi ID afgør filnavn
         this.ID = ID;
     }
     public String getName() {

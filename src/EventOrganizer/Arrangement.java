@@ -32,7 +32,7 @@ public class Arrangement implements Readable, Exportable {
 
     } // Tillader objektet at blive oprettet fra en Arrangement fil
 
-    private DateTimeFormatter dTFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private DateTimeFormatter dTFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); // dag/tids format, importeret klasse
     private String name = "New Arrangement";
     private ArrayList<Event> listOfEvents = new ArrayList<>();
     private LocalDateTime startTime = LocalDateTime.now(); //LocalDateTime er en importeret klasse der holder styr på tid.
@@ -47,7 +47,7 @@ public class Arrangement implements Readable, Exportable {
         return name;
     }
     public void setName(String name) {
-        Filehandling.deleteFile("ARRANGEMENT_" + name); // sletter gammel fil når navn ændres
+        Filehandling.deleteFile("ARRANGEMENT_" + this.name); // sletter gammel fil når navn ændres
         this.name = name;
     }
     public ArrayList<Event> getEventList (){

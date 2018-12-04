@@ -34,14 +34,14 @@ public class Transport extends Event {
         setVehicle(eventData[10]);
     } //Fra Interface Exportable, tillader objektet at blive oprettet fra en Arrangement fil
 
-    private String destination = "Destionation";
+    private String destination = "Destination";
     private String vehicle = "Vehicle";
 
     public Transport(Arrangement arrangement) {
-        setArrangement(arrangement);
-        arrangement.getEventList().add(this);
-        Filehandling.autoAddExportable(this);
-        Menu.events.add(this);
+        setArrangement(arrangement); // Sætter eventets arrangement
+        arrangement.getEventList().add(this); // Tilføjer til arrangements eventlist
+        Filehandling.autoAddExportable(this); // Tilføjer til allExports i filehandling
+        Menu.events.add(this); // tilføjer til liste over alle events
     }
 
     public String getDestination() {

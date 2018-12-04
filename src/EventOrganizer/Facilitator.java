@@ -38,8 +38,8 @@ public class Facilitator implements Readable, Exportable {
     private ArrayList<Arrangement> listOfArrangements;
 
     public Facilitator() {
-        Filehandling.autoAddExportable(this);
-        Menu.facilitators.add(this);
+        Filehandling.autoAddExportable(this); // tilføjer til allExports
+        Menu.facilitators.add(this); // tilføjer til liste over facilitators
         listOfEvents = new ArrayList<>();
         listOfArrangements = new ArrayList<>();
     }
@@ -48,6 +48,7 @@ public class Facilitator implements Readable, Exportable {
         return ID;
     }
     public void setID(String ID) {
+        Filehandling.deleteFile("FACILITATOR_" + ID); // Sletter den gamle fil når ID bliver ændret, fordi ID afgør filnavn
         this.ID = ID;
     }
     public String getName() {
@@ -61,7 +62,6 @@ public class Facilitator implements Readable, Exportable {
         for (int i = 0; i < listOfEvents.size(); i++){
             System.out.println(listOfEvents.get(i).getName() + " within the arrangement " + listOfEvents.get(i).getArrangement().getName());
         }
-        System.out.println("\n");
     } // fortæller alle events en facilitator er med i.
     public void addToEventList(Event event){
         listOfEvents.add(event);
@@ -94,8 +94,9 @@ public class Facilitator implements Readable, Exportable {
     }
 
     public void deleteFacilitator(){
-        Menu.facilitators.remove(this);
-        Filehandling.deleteFile("FACILITATOR_" + name);
-    } //UPDATE THIS
+        Menu.facilitators.remove(this); //fjerner fra facilitator liste
+        Filehandling.deleteFile("FACILITATOR_" + ID); //kalder deleteFile i filehandling, for at slette filen selv
+        Filehandling.removeExportable(this); // fjerner fra allExports listen
+    }
 
 }

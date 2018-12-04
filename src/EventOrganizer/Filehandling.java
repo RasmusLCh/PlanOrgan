@@ -140,12 +140,20 @@ public class Filehandling {
     public static void deleteFile(String filename){
         readingFile = new File(filename + ".csv");
         if (readingFile.delete()){
-            System.out.println("Information about " + filename +  " has been deleted.");
             deleteFromMaster(filename);
         }
     }
     public static void deleteFromMaster(String name){
-
+        try {
+            Path path = Paths.get(masterFile.getName());
+            List<String> content = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
+            for(int i = 0; i < content.size(); i++){
+                if(content.get(i).equals(name)){
+                    content.remove(i);
+                }
+            }
+            Files.write(path, content, StandardCharsets.UTF_8);
+        } catch (IOException ioe) { }
     }
 
     /* Import sektion - Alt her er relevant for import af data */

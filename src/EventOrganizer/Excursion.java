@@ -36,10 +36,10 @@ public class Excursion extends Event {
     private String destination = "Destination";
 
     public Excursion(Arrangement arrangement) {
-        setArrangement(arrangement);
-        arrangement.getEventList().add(this);
-        Filehandling.autoAddExportable(this);
-        Menu.events.add(this);
+        setArrangement(arrangement); // Sætter eventets arrangement
+        arrangement.getEventList().add(this); // Tilføjer til arrangements eventlist
+        Filehandling.autoAddExportable(this); // Tilføjer til allExports i filehandling
+        Menu.events.add(this); // tilføjer til liste over alle events
     }
 
     public String getDestination() {

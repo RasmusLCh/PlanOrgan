@@ -5,3 +5,5 @@ public interface Readable { //Interface der tillader sektretæren at læse infor
     String exportOptions = "\n 111: Select for Export \n 112: Export only Selected for Export \n 113: Export All";
     void readEditInfo();
 }
+
+// Readable bliver ikke brugt helt så meget som jeg originalt havde planlagt. - Oliver

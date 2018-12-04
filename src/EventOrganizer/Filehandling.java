@@ -15,8 +15,8 @@ public class Filehandling {
     private static File readingFile;
 
     /* Export sektion - Alt her er relevant for export af data */
-    private static ArrayList<Exportable> selectedExports = new ArrayList<>(); //Package private, en liste over udvalgte objekter
-    private static ArrayList<Exportable> allExports = new ArrayList<>(); //Package private, en liste over alle objekter der er blevet oprettet/redigeret i denne session.
+    private static ArrayList<Exportable> selectedExports = new ArrayList<>(); // En liste over udvalgte objekter
+    private static ArrayList<Exportable> allExports = new ArrayList<>(); // En liste over alle objekter der er blevet oprettet/redigeret i denne session.
 
     public static void addExportable(Exportable exportable){
         selectedExports.add(exportable);
@@ -137,6 +137,16 @@ public class Filehandling {
         } catch (IOException ioe) { }
     } //Metode til at skrive til filen der indeholder alle filnavne.
 
+    public static void deleteFile(String filename){
+        readingFile = new File(filename + ".csv");
+        if (readingFile.delete()){
+            System.out.println("Information about " + filename +  " has been deleted.");
+            deleteFromMaster(filename);
+        }
+    }
+    public static void deleteFromMaster(String name){
+
+    }
 
     /* Import sektion - Alt her er relevant for import af data */
     public static void importAll(){

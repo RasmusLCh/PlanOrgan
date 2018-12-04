@@ -69,7 +69,6 @@ public class Customer implements Exportable, Readable {
     } //Fjerner et event fra listen, og det tilhørende Arrangement hvis det ikke er over andre events.
 
     public void deleteCustomer() {
-
     } //UPDATE THIS
 
 }

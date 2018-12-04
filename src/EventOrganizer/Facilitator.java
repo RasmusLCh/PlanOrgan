@@ -94,7 +94,8 @@ public class Facilitator implements Readable, Exportable {
     }
 
     public void deleteFacilitator(){
-        //find filen, og slet den
+        Menu.facilitators.remove(this);
+        Filehandling.deleteFile("FACILITATOR_" + name);
     } //UPDATE THIS
 
 }

@@ -139,6 +139,10 @@ public class Arrangement implements Readable, Exportable {
     }
 
     public void deleteArrangement(){
-    } //UPDATE THIS       //finder arrangement filen, og sletter den
-
+        Menu.arrangements.remove(this);
+        for (int i = 0; i < listOfEvents.size(); i++){
+            listOfEvents.get(i).deleteEvent();
+        }
+        Filehandling.deleteFile("ARRANGEMENT_" + name);
+    }
 }

@@ -203,6 +203,9 @@ public class Event implements Readable, Exportable {
     public void deleteEvent(){
         Filehandling.writeToLine( "ARRANGEMENT_" + getArrangement().getName(), "NO EVENT WITH THIS ID", ID);
         Menu.events.remove(this);
+        arrangement.getEventList().remove(this);
+        facilitator.removeFromEventList(this);
+        customer.removeFromEventList(this);
         Filehandling.removeExportable(this);
     } //finder den relevante arrangement fil, og sletter information, kun om dette event, ved at erstatte linjen
 

@@ -77,7 +77,18 @@ public class Event implements Readable, Exportable {
             startTime += ":00";
         }
         if(startTime.charAt(4) == '-' && startTime.charAt(7) == '-' && startTime.charAt(10) == ' ' && startTime.charAt(13) == ':' && startTime.charAt(16) == ':') {
-            this.startTime = (LocalDateTime.parse(startTime.substring(0, 19), dTFormat));
+            LocalDateTime arrangementStartTime = (LocalDateTime.parse(arrangement.getStartTime().substring(0, 19), dTFormat));
+            LocalDateTime arrangementEndTime = (LocalDateTime.parse(arrangement.getEndTime().substring(0, 19), dTFormat));
+            LocalDateTime eventStartTime = (LocalDateTime.parse(startTime.substring(0, 19), dTFormat));
+            if(Duration.between(arrangementStartTime, eventStartTime).toMinutes() >= 0 && Duration.between(arrangementEndTime, eventStartTime).toMinutes() <= 0 ){
+                if(Duration.between(eventStartTime, endTime).toMinutes() <= 0) {
+                    this.startTime = eventStartTime;
+                } else {
+                    System.out.println("Start time must be before the end time.");
+                }
+            } else {
+                System.out.println("Start time must be within the borders of the Arrangement.");
+            }
         } else {
         System.out.println(startTime + " is not a valid time.");
         }
@@ -97,7 +108,18 @@ public class Event implements Readable, Exportable {
             endTime += ":00";
         }
         if(endTime.charAt(4) == '-' && endTime.charAt(7) == '-' && endTime.charAt(10) == ' ' && endTime.charAt(13) == ':' && endTime.charAt(16) == ':') {
-            this.endTime = (LocalDateTime.parse(endTime.substring(0, 19), dTFormat));
+            LocalDateTime arrangementStartTime = (LocalDateTime.parse(arrangement.getStartTime().substring(0, 19), dTFormat));
+            LocalDateTime arrangementEndTime = (LocalDateTime.parse(arrangement.getEndTime().substring(0, 19), dTFormat));
+            LocalDateTime eventEndTime = (LocalDateTime.parse(endTime.substring(0, 19), dTFormat));
+            if(Duration.between(arrangementStartTime, eventEndTime).toMinutes() >= 0 && Duration.between(arrangementEndTime, eventEndTime).toMinutes() <= 0 ){
+                if(Duration.between(eventEndTime, startTime).toMinutes() <= 0) {
+                    this.endTime = eventEndTime;
+                } else {
+                    System.out.println("End time must be after the start time.");
+                }
+            } else {
+                System.out.println("End time must be within the borders of the Arrangement.");
+            }
         } else {
             System.out.println(endTime + " is not a valid time.");
         }

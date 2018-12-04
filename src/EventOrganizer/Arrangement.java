@@ -1,5 +1,6 @@
 package EventOrganizer;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -66,7 +67,19 @@ public class Arrangement implements Readable, Exportable {
             startTime += ":00";
         }
         if(startTime.charAt(4) == '-' && startTime.charAt(7) == '-' && startTime.charAt(10) == ' ' && startTime.charAt(13) == ':' && startTime.charAt(16) == ':') {
-            this.startTime = (LocalDateTime.parse(startTime.substring(0, 19), dTFormat));
+            LocalDateTime arrangementStartTime = (LocalDateTime.parse(startTime.substring(0, 19), dTFormat));
+            boolean invalidTime = false;
+            for(int i = 0; i < listOfEvents.size(); i++){
+                LocalDateTime eventStartTime = (LocalDateTime.parse(listOfEvents.get(i).getStartTime().substring(0, 19), dTFormat));
+                if(!(Duration.between(arrangementStartTime, eventStartTime).toMinutes() >= 0)){
+                    invalidTime = true;
+                }
+            }
+            if(invalidTime){
+                System.out.println("Start time must be before start of the first event!");
+            } else {
+                this.startTime = arrangementStartTime;
+            }
         } else {
             System.out.println(startTime + " is not a valid time.");
         }
@@ -86,7 +99,19 @@ public class Arrangement implements Readable, Exportable {
             endTime += ":00";
         }
         if(endTime.charAt(4) == '-' && endTime.charAt(7) == '-' && endTime.charAt(10) == ' ' && endTime.charAt(13) == ':' && endTime.charAt(16) == ':') {
-            this.endTime = (LocalDateTime.parse(endTime.substring(0, 19), dTFormat));
+            LocalDateTime arrangementEndTime = (LocalDateTime.parse(endTime.substring(0, 19), dTFormat));
+            boolean invalidTime = false;
+            for(int i = 0; i < listOfEvents.size(); i++){
+                LocalDateTime eventEndTime = (LocalDateTime.parse(listOfEvents.get(i).getEndTime().substring(0, 19), dTFormat));
+                if(!(Duration.between(arrangementEndTime, eventEndTime).toMinutes() >= 0)){
+                    invalidTime = true;
+                }
+            }
+            if(invalidTime){
+                System.out.println("End time must be after the end of the last event!");
+            } else {
+                this.endTime = arrangementEndTime;
+            }
         } else {
             System.out.println(endTime + " is not a valid time.");
         }

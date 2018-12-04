@@ -65,6 +65,8 @@ public class Menu {
                 }
                 if(!exists){
                     System.out.println("There appears to be no arrangement with that name. \n");
+                    System.out.println("Press enter to return");
+                    stringInput = input.nextLine();
                     arrangementMenu();
                 }
                 break; // breaker ud af casen
@@ -101,9 +103,13 @@ public class Menu {
                 editArrangement(arrangement);
                 break;
             case 4: arrangement.getEvents();
+                System.out.println("Press enter to return");
+                stringInput = input.nextLine();
                 editArrangement(arrangement);
                 break;
             case 5: arrangement.getCustomers();
+                System.out.println("Press enter to return");
+                stringInput = input.nextLine();
                 editArrangement(arrangement);
                 break;
             case 99: System.out.println("Are you sure you wish to delete this Arrangement, and all of its associated events? \n 1: Yes \n Default: No");
@@ -116,6 +122,8 @@ public class Menu {
                 break;
             case 111: Filehandling.addExportable(arrangement);
                 System.out.println("Added to selected Export list");
+                System.out.println("Press enter to return");
+                stringInput = input.nextLine();
                 editArrangement(arrangement);
                 break;
             case 112: Filehandling.executeExport();
@@ -186,6 +194,8 @@ public class Menu {
         }
         if(!exists) { // Hvis arrangementet ikke eksisterer får brugeren en fejl meddelse, og prøver igen.
             System.out.println("There appears to be no arrangement with that name. \n");
+            System.out.println("Press enter to return");
+            stringInput = input.nextLine();
             eventMenu();
         } else {
             System.out.println("What kind of Event do you wish to create? \n 1: Excursion \n 2: Meeting \n 3: Transport \n 0: Return");
@@ -283,6 +293,8 @@ public class Menu {
                 break;
             case 111: Filehandling.addExportable(event);
                 System.out.println("Added to selected Export list");
+                System.out.println("Press enter to return");
+                stringInput = input.nextLine();
                 editExcursion(event);
                 break;
             case 112: Filehandling.executeExport();
@@ -380,6 +392,8 @@ public class Menu {
                 break;
             case 111: Filehandling.addExportable(event);
                 System.out.println("Added to selected Export list");
+                System.out.println("Press enter to return");
+                stringInput = input.nextLine();
                 editTransport(event);
                 break;
             case 112: Filehandling.executeExport();
@@ -471,6 +485,8 @@ public class Menu {
                 break;
             case 111: Filehandling.addExportable(event);
                 System.out.println("Added to selected Export list");
+                System.out.println("Press enter to return");
+                stringInput = input.nextLine();
                 editMeeting(event);
                 break;
             case 112: Filehandling.executeExport();
@@ -505,6 +521,8 @@ public class Menu {
                 }
                 if (!exists){
                     System.out.println("There appears to be no facilitator with that ID. \n");
+                    System.out.println("Press enter to return");
+                    stringInput = input.nextLine();
                     facilitatorMenu();
                 }
                 break; // breaker ud af casen
@@ -534,6 +552,8 @@ public class Menu {
                 editFacilitator(facilitator);
                 break;
             case 3: facilitator.getEvents();
+                System.out.println("Press enter to return");
+                stringInput = input.nextLine();
                 editFacilitator(facilitator);
                 break;
             case 99: System.out.println("Are you sure you wish to delete this Facilitator? \n 1: Yes \n Default: No");
@@ -546,6 +566,8 @@ public class Menu {
                 break;
             case 111: Filehandling.addExportable(facilitator);
                 System.out.println("Added to selected Export list");
+                System.out.println("Press enter to return");
+                stringInput = input.nextLine();
                 editFacilitator(facilitator);
                 break;
             case 112: Filehandling.executeExport();
@@ -584,6 +606,8 @@ public class Menu {
                 }
                 if (!exists) {
                     System.out.println("There appears to be no customer with that name. \n");
+                    System.out.println("Press enter to return");
+                    stringInput = input.nextLine();
                     customerMenu();
                 }
                 break; // breaker ud af casen
@@ -601,6 +625,8 @@ public class Menu {
         stringInput = input.nextLine();
         switch (intInput){
             case 1: customer.getEvents();
+                System.out.println("Press enter to return");
+                stringInput = input.nextLine();
                 editCustomer(customer);
                 break;
             case 99: System.out.println("Are you sure you wish to delete this Customer? \n 1: Yes \n Default: No");
@@ -613,6 +639,8 @@ public class Menu {
                 break;
             case 111: Filehandling.addExportable(customer);
                 System.out.println("Added to selected Export list");
+                System.out.println("Press enter to return");
+                stringInput = input.nextLine();
                 editCustomer(customer);
                 break;
             case 112: Filehandling.executeExport();

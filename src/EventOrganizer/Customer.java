@@ -24,6 +24,7 @@ public class Customer implements Exportable, Readable {
 
     public Customer (String name) {
         this.name = name;
+        Filehandling.autoAddExportable(this);
         Menu.customers.add(this);
         listOfEvents = new ArrayList<>();
         listOfArrangements = new ArrayList<>();

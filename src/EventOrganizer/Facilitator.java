@@ -33,7 +33,7 @@ public class Facilitator implements Readable, Exportable {
     } //Fra Interface Exportable, tillader objektet at blive oprettet fra en Facilitator fil
 
     private String ID = "New Facilitator";
-    private String name= "John Smith";
+    private String name= "New Facilitator";
     public ArrayList<Event> listOfEvents;
     private ArrayList<Arrangement> listOfArrangements;
 

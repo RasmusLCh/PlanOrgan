@@ -12,7 +12,7 @@ public class Arrangement implements Readable, Exportable {
         System.out.println("Currently editing " + name);
         System.out.println("Runs from " + getStartTime() + " to " + getEndTime());
         System.out.println("Currently slated price: " + getPrice() + " without VAT, or " + (getPrice() * 1.25 ) + " with VAT");
-        System.out.println(" 1: Name \n 2: Start Time \n 3: End Time \n 99: Delete Arrangement " + returnOptions + exportOptions);
+        System.out.println(" 1: Name \n 2: Start Time \n 3: End Time \n 4: View Events \n 5: View Customers \n 99: Delete Arrangement " + returnOptions + exportOptions);
     } //Fra Interface Readable, tillader objektet at blive læst af brugeren
 
     // Exportable Metoder
@@ -48,7 +48,7 @@ public class Arrangement implements Readable, Exportable {
     public void setName(String name) {
         this.name = name;
     }
-    public ArrayList getEventList (){
+    public ArrayList<Event> getEventList (){
         return listOfEvents;
     }
     public String getStartTime() {
@@ -90,6 +90,20 @@ public class Arrangement implements Readable, Exportable {
         } else {
             System.out.println(endTime + " is not a valid time.");
         }
+    }
+    public void getEvents(){
+        System.out.println("Under " + name + " exists events:");
+        for (int i = 0; i < listOfEvents.size(); i++){
+            System.out.println(listOfEvents.get(i).getName());
+        }
+        System.out.println("\n");
+    } // fortæller alle events under et arrangement.
+    public void getCustomers(){
+        System.out.println("Under " + name + " is the customers:");
+        for (int i = 0; i < listOfEvents.size(); i++){
+            System.out.println(listOfEvents.get(i).getCustomer() + " in Event " + listOfEvents.get(i).getName());
+        }
+        System.out.println("\n");
     }
     public float getPrice() {
         float price = 0;

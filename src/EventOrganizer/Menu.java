@@ -100,6 +100,12 @@ public class Menu {
                 arrangement.setEndTime(stringInput);
                 editArrangement(arrangement);
                 break;
+            case 4: arrangement.getEvents();
+                editArrangement(arrangement);
+                break;
+            case 5: arrangement.getCustomers();
+                editArrangement(arrangement);
+                break;
             case 99: System.out.println("Are you sure you wish to delete this Arrangement, and all of its associated events? \n 1: Yes \n Default: No");
                 intInput = input.nextInt();
                 stringInput = input.nextLine();

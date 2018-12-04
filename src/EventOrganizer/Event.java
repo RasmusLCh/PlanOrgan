@@ -16,7 +16,7 @@ public class Event implements Readable, Exportable {
     public void importData(String data) { } //Events af en uspecificeret type kan ikke importeres
 
     private DateTimeFormatter dTFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    private int ID = 0;
+    private int ID = 1;
     private String name = "New Event";
     private String description = "Insert description here";
     private Arrangement arrangement = null;
@@ -31,7 +31,18 @@ public class Event implements Readable, Exportable {
         return this.ID;
     }
     public void setID(int ID){
-        this.ID = ID;
+        if (ID < 1){
+            System.out.println("ID must be 1 or Higher!");
+            return;
+        } else {
+            for(int i = 0; i < arrangement.getEventList().size(); i++){
+                if(arrangement.getEventList().get(i).getID() == ID){
+                    System.out.println("Event with that ID already exists under Arrangement " + arrangement.getName());
+                    return;
+                }
+            }
+            this.ID = ID;
+        }
     }
     public String getName(){
         return this.name;

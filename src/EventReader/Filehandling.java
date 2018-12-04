@@ -68,14 +68,20 @@ public class Filehandling {
                     Event newEvent;
                     if(readingString.charAt(0) == 'E'){
                         newEvent = new Excursion(newArrangement);
+                        String[] eventData = readingString.split(",");
+                        new Customer(eventData[8]);
                         newEvent.importData(readingString); //importData i det nye objekt bliver kaldet, hvilket sætter alle variabler op
                         newEvent.setID(linecount);
                     } else if(readingString.charAt(0) == 'T'){
                         newEvent = new Transport(newArrangement);
+                        String[] eventData = readingString.split(",");
+                        new Customer(eventData[8]);
                         newEvent.importData(readingString); //importData i det nye objekt bliver kaldet, hvilket sætter alle variabler op
                         newEvent.setID(linecount);
                     } else if(readingString.charAt(0) == 'M'){
                         newEvent = new Meeting(newArrangement);
+                        String[] eventData = readingString.split(",");
+                        new Customer(eventData[8]);
                         newEvent.importData(readingString); //importData i det nye objekt bliver kaldet, hvilket sætter alle variabler op
                         newEvent.setID(linecount);
                     }

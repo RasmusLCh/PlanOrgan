@@ -8,7 +8,6 @@ public class Menu {
 
     private static String stringInput;
     private static Scanner input = new Scanner(System.in);
-    static EventOrganizer.Menu lists = new EventOrganizer.Menu();
 
     public static void main (String[] args){
         validate();

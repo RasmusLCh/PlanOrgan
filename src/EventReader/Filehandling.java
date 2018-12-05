@@ -23,7 +23,6 @@ public class Filehandling {
         try {
             Path path = Paths.get(masterFile.getName());
             List<String> content = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
-            int start = 0;
             int end = 0;
                 for (int i = 0; i < content.size(); i++){
                 if (content.get(i).charAt(0) == 'c'){
@@ -31,7 +30,7 @@ public class Filehandling {
                     break;
                 }
             }
-            for (int i = start; i < end; i++){
+            for (int i = 1; i < end; i++){
                 if (content.get(i).equals("FACILITATOR_" + ID)){
                     return true;
                 }
@@ -41,7 +40,7 @@ public class Filehandling {
 
         } catch (FileNotFoundException fnfe) {}  catch (IOException ioe) {}
         return false;
-    } //metode til at importere alt data på samme tid.
+    } // metode til at finde facilitator fil. Returnerer en bool, true hvis det lykkedes, ellers false
 
     public static void importData(String filename){
         try {
@@ -52,7 +51,6 @@ public class Filehandling {
             newFacilitator.setID(filename.substring(12));
             newFacilitator.setName(readingScanner.nextLine()); //Information om Events og Arrangementer bliver tilføjet til en faciliatotor gennem Event's ImportData
             readingString = readingScanner.nextLine();
-
             String[] arrangementData = readingString.split(",");
             for (int i = 0; i < arrangementData.length; i++){
                 int linecount = 0; //Int til at tælle den nuværende linje, bliver brugt til at afgøre ID for Events
@@ -89,5 +87,5 @@ public class Filehandling {
             }
             Menu.readFacilitator(newFacilitator);
         } catch (FileNotFoundException fnfe) {}
-    }
+    } // importerer data ud fra hvad der står i facilitator filen
 }

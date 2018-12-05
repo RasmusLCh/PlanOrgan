@@ -1,6 +1,6 @@
 package EventReader;
 
-import EventOrganizer.*; // Importerer vores egen klasse fra EventOrganizer
+import EventOrganizer.*; // Importerer vores egne klasser fra EventOrganizer
 
 import java.util.Scanner;
 

@@ -1,6 +1,8 @@
 package EventOrganizer;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -165,6 +167,7 @@ public class Filehandling {
                     Facilitator newFacilitator = new Facilitator();
                     newFacilitator.setID(readingString.substring(12));
                     newFacilitator.setName(readingScanner.nextLine()); //Information om Events og Arrangementer bliver tilføjet til en faciliatotor gennem Event's ImportData
+                    readingScanner.close();
                 } else if(readingString.charAt(0) == 'C'){ //Hvis første bogstav på linjen er C er information om en Customer
                     new Customer(readingString.substring(9)); // Det nye Customer objekt bliver ikke gemt i en attribut/variabel, da vi kun har brug for at oprette den
                     //Information om Events og Arrangementer bliver tilføjet til en customer gennem Event's ImportData
@@ -194,8 +197,10 @@ public class Filehandling {
                             newEvent.setID(linecount);
                         }
                     }
+                    readingScanner.close();
                 }
             }
+            masterScanner.close();
         } catch (FileNotFoundException fnfe) {}
     } //metode til at importere alt data på samme tid.
 

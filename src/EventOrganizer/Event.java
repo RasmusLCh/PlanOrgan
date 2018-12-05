@@ -30,18 +30,22 @@ public class Event implements Readable, Exportable {
     public int getID(){
         return this.ID;
     }
-    public void setID(int ID){
-        if (ID < 1){ // ID skal være 1 eller højere
-            System.out.println("ID must be 1 or Higher!");
-            return;
-        } else {
-            for(int i = 0; i < arrangement.getEventList().size(); i++){ // tjekker alle events under arrangement igennem, for en der har samme ID
-                if(arrangement.getEventList().get(i).getID() == ID){
-                    System.out.println("Event with that ID already exists under Arrangement " + arrangement.getName()); // hvis ID allerede eksisterer, skiftes ID ikke
-                    return;
+    public void setID(int ID) {
+        if (Menu.importDone) {
+            if (ID < 1) { // ID skal være 1 eller højere
+                System.out.println("ID must be 1 or Higher!");
+                return;
+            } else {
+                for (int i = 0; i < arrangement.getEventList().size(); i++) { // tjekker alle events under arrangement igennem, for en der har samme ID
+                    if (arrangement.getEventList().get(i).getID() == ID) {
+                        System.out.println("Event with that ID already exists under Arrangement " + arrangement.getName()); // hvis ID allerede eksisterer, skiftes ID ikke
+                        return;
+                    }
                 }
+                Filehandling.writeToLine("ARRANGEMENT_" + getArrangement().getName(), "NO EVENT WITH THIS ID", this.ID); //fjerner gammel info hvis det lykkedes
+                this.ID = ID;
             }
-            Filehandling.writeToLine( "ARRANGEMENT_" + getArrangement().getName(), "NO EVENT WITH THIS ID", this.ID); //fjerner gammel info hvis det lykkedes
+        } else {
             this.ID = ID;
         }
     }
@@ -74,7 +78,7 @@ public class Event implements Readable, Exportable {
     }
     public void setStartTime(String startTime) {
         startTime = startTime.replace('T', ' '); // erstatter T med mellemrum
-        if(startTime.length() == 16){    //Hvis sekunder ikke eksisterer i variablen, tilføjer vi den som 00
+        if(startTime.length() == 16){    //Hvis sekunder ikke eksisterer i variablen, tilføjer vi dem som 00
             startTime += ":00";
         }
         if(startTime.charAt(4) == '-' && startTime.charAt(7) == '-' && startTime.charAt(10) == ' ' && startTime.charAt(13) == ':' && startTime.charAt(16) == ':') { // tjekker format
@@ -85,7 +89,11 @@ public class Event implements Readable, Exportable {
                 if(Duration.between(eventStartTime, endTime).toMinutes() >= 0) { //tjekker om tiden er før endTime
                     this.startTime = eventStartTime;
                 } else {
-                    System.out.println("Start time must be before the end time.");
+                    if (Menu.importDone) { // Hvis import ikke er færdig ignorer vi fejl
+                        System.out.println("Start time must be before the end time.");
+                    } else {
+                        this.startTime = eventStartTime;
+                    }
                 }
             } else {
                 if(Menu.importDone) {
@@ -118,7 +126,11 @@ public class Event implements Readable, Exportable {
                 if(Duration.between(eventEndTime, startTime).toMinutes() <= 0) { //tjekker om tiden er efter startTime
                     this.endTime = eventEndTime;
                 } else {
-                    System.out.println("End time must be after the start time.");
+                    if (Menu.importDone) { // Hvis import ikke er færdig ignorer vi fejl
+                        System.out.println("End time must be after the start time.");
+                    } else {
+                        this.endTime = eventEndTime;
+                    }
                 }
             } else {
                 if(Menu.importDone) {

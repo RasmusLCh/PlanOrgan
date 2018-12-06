@@ -24,16 +24,16 @@ public class Filehandling {
         selectedExports.add(exportable);
     } //metode der tilføjer et objekt til den selektive liste.
     public static void executeExport(){
-        for (int i = 0; i < selectedExports.size(); i++){
-            selectedExports.get(i).exportData(); // kalder exportData i alle objekter i selectedExports listen
+        for (Exportable exportable : selectedExports){
+            exportable.exportData(); // kalder exportData i alle objekter i selectedExports listen
         }
     } //metode der eksporterer alt fra den selektive liste.
     public static void autoAddExportable(Exportable exportable){
         allExports.add(exportable);
     } //Metode der bliver kaldt som følge af en konstruktor, som tilføjer objektet til allExports listen.
     public static void exportAll(){
-        for (int i = 0; i < allExports.size(); i++){
-            allExports.get(i).exportData(); // kalder exportData i alle objekter i allExports listen
+        for (Exportable exportable : allExports){
+            exportable.exportData(); // kalder exportData i alle objekter i allExports listen
         }
     } //Exporterer alle objekter i allExports listen.
     public static void removeExportable(Exportable exportable){

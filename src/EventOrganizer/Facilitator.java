@@ -16,12 +16,12 @@ public class Facilitator implements Readable, Exportable {
     public void exportData() { //UPDATE THIS / MASTERFILE
         Filehandling.writeToMaster("FACILITATOR_" + ID);
         String arrangementList = "";
-        for (int i = 0; i < listOfArrangements.size(); i++){
-            arrangementList += listOfArrangements.get(i).getName() + ",";
+        for (Arrangement arrangement : listOfArrangements){
+            arrangementList += arrangement.getName() + ",";
         }
         String eventList = "";
-        for (int i = 0; i < listOfEvents.size(); i++){
-            eventList += listOfEvents.get(i).getName() + ",";
+        for (Event event : listOfEvents){
+            eventList += event.getName() + ",";
         }
         Filehandling.writeToLine("FACILITATOR_" + ID, name, 0);
         Filehandling.writeToLine("FACILITATOR_" + ID, arrangementList, 1);
@@ -59,15 +59,15 @@ public class Facilitator implements Readable, Exportable {
     }
     public void getEvents(){
         System.out.println(ID + " participates in:");
-        for (int i = 0; i < listOfEvents.size(); i++){
-            System.out.println(listOfEvents.get(i).getName() + " within the arrangement " + listOfEvents.get(i).getArrangement().getName());
+        for (Event event : listOfEvents){
+            System.out.println(event.getName() + " within the arrangement " + event.getArrangement().getName());
         }
     } // fortæller alle events en facilitator er med i.
     public void addToEventList(Event event){
         listOfEvents.add(event);
         boolean alreadyExists = false;
-        for(int i = 0; i < listOfArrangements.size(); i++){
-            if(listOfArrangements.get(i) == event.getArrangement()){
+        for(Arrangement arrangement : listOfArrangements){
+            if(arrangement == event.getArrangement()){
                 alreadyExists = true;
                 break;
             }
@@ -79,8 +79,8 @@ public class Facilitator implements Readable, Exportable {
     public void removeFromEventList(Event event){
         listOfEvents.remove(event);
         boolean keepArrangement = false;
-        for(int i = 0; i < listOfEvents.size(); i++){
-            if(listOfEvents.get(i).getArrangement() == event.getArrangement()){
+        for(Event eventFromList : listOfEvents){
+            if(eventFromList.getArrangement() == event.getArrangement()){
                 keepArrangement = true;
                 break;
             }

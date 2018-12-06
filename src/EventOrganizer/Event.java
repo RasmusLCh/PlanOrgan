@@ -36,8 +36,8 @@ public class Event implements Readable, Exportable {
                 System.out.println("ID must be 1 or Higher!");
                 return;
             } else {
-                for (int i = 0; i < arrangement.getEventList().size(); i++) { // tjekker alle events under arrangement igennem, for en der har samme ID
-                    if (arrangement.getEventList().get(i).getID() == ID) {
+                for (Event event : arrangement.getEventList()) { // tjekker alle events under arrangement igennem, for en der har samme ID
+                    if (event.getID() == ID) {
                         System.out.println("Event with that ID already exists under Arrangement " + arrangement.getName()); // hvis ID allerede eksisterer, skiftes ID ikke
                         return;
                     }
@@ -153,9 +153,9 @@ public class Event implements Readable, Exportable {
         if(this.facilitator != null){
             this.facilitator.removeFromEventList(this); //fjerner gammel facilitator fra eventet
         }
-        for (int i = 0; i < Menu.facilitators.size(); i++){ //søger customer listen igennem for at finde en med det rigtige navn
-            if(Menu.facilitators.get(i).getID().equals(facilitator)){
-                this.facilitator = Menu.facilitators.get(i); // tilføjer den her.
+        for (Facilitator facilitatorFromList : Menu.facilitators){ //søger customer listen igennem for at finde en med det rigtige navn
+            if(facilitatorFromList.getID().equals(facilitator)){
+                this.facilitator = facilitatorFromList; // tilføjer den her.
                 this.facilitator.addToEventList(this); // tilføjer den i dens egen instans.
                 return;
             }
@@ -188,9 +188,9 @@ public class Event implements Readable, Exportable {
         if(this.customer != null){
             this.customer.removeFromEventList(this); //fjerner gammel customer fra eventet
         }
-        for (int i = 0; i < Menu.customers.size(); i++){ //søger customer listen igennem for at finde en med det rigtige navn
-            if(Menu.customers.get(i).getName().equals(customer)){
-                this.customer = Menu.customers.get(i); // tilføjer den her.
+        for (Customer customerFromList : Menu.customers){ //søger customer listen igennem for at finde en med det rigtige navn
+            if(customerFromList.getName().equals(customer)){
+                this.customer = customerFromList; // tilføjer den her.
                 this.customer.addToEventList(this); // tilføjer den i dens egen instans.
                 return;
             }

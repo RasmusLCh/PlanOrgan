@@ -36,16 +36,16 @@ public class Customer implements Exportable, Readable {
 
     public void getEvents() {
         System.out.println(name + " participates in:");
-        for (int i = 0; i < listOfEvents.size(); i++){
-            System.out.println(listOfEvents.get(i).getName() + " within the arrangement " + listOfEvents.get(i).getArrangement().getName());
+        for (Event event : listOfEvents){
+            System.out.println(event.getName() + " within the arrangement " + event.getArrangement().getName());
         }
         System.out.println("\n");
     } // fortæller alle events en customer er med i.
     public void addToEventList(Event event) {
         listOfEvents.add(event);
         boolean alreadyExists = false;
-        for(int i = 0; i < listOfArrangements.size(); i++){
-            if(listOfArrangements.get(i) == event.getArrangement()){
+        for(Arrangement arrangement : listOfArrangements){
+            if(arrangement == event.getArrangement()){
                 alreadyExists = true;
                 break;
             }
@@ -57,8 +57,8 @@ public class Customer implements Exportable, Readable {
     public void removeFromEventList(Event event){
         listOfEvents.remove(event);
         boolean keepArrangement = false;
-        for(int i = 0; i < listOfEvents.size(); i++){
-            if(listOfEvents.get(i).getArrangement() == event.getArrangement()){
+        for(Event eventFromList : listOfEvents){
+            if(eventFromList.getArrangement() == event.getArrangement()){
                 keepArrangement = true;
                 break;
             }

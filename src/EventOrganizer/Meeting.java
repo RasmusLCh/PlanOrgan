@@ -18,9 +18,9 @@ public class Meeting extends Event {
     public void importData(String data) {
         String[] eventData = data.split(",");
         setName(eventData[1]);
-        for (int i = 0; i < Menu.facilitators.size(); i++){
-            if(Menu.facilitators.get(i).getID().equals(eventData[2])){
-                setFacilitator(Menu.facilitators.get(i).getID());
+        for (Facilitator facilitator : Menu.facilitators){
+            if(facilitator.getID().equals(eventData[2])){
+                setFacilitator(facilitator.getID());
                 break;
             }
         }

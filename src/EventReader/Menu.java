@@ -32,9 +32,9 @@ public class Menu {
         if(stringInput.equals("EXIT")){
             System.exit(0);
         } else
-        for (int i = 0; i < facilitator.listOfEvents.size(); i++){
-            if (facilitator.listOfEvents.get(i).getName().equals(stringInput)){
-                readEventInfo(facilitator.listOfEvents.get(i), facilitator);
+        for (Event event : facilitator.listOfEvents){
+            if (event.getName().equals(stringInput)){
+                readEventInfo(event, facilitator);
                 break;
             }
         }

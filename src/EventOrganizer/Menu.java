@@ -37,7 +37,8 @@ public class Menu {
                 break;
             case 4: customerMenu();
                 break;
-            case 0: return;
+            case 0: Filehandling.exportAll();
+                return;
             default: System.out.println("Invalid Input, try again");
                 startMenu();
                 break;
@@ -56,10 +57,10 @@ public class Menu {
             case 2: System.out.println("Please type the name of the Arrangement you wish to edit: ");
                 stringInput = input.nextLine();
                 boolean exists = false;
-                for (int i = 0; i < Menu.arrangements.size(); i++){
-                    if(arrangements.get(i).getName().equals(stringInput)){
+                for (Arrangement arrangement : arrangements){
+                    if(arrangement.getName().equals(stringInput)){
                         exists = true;
-                        editArrangement(arrangements.get(i));
+                        editArrangement(arrangement);
                         break; // breaker ud af for loopet
                     }
                 }
@@ -150,9 +151,9 @@ public class Menu {
             case 2: System.out.println("Please type the name of the event you wish to edit: ");
                 stringInput = input.nextLine();
                 boolean exists = false;
-                for (int i = 0; i < Menu.events.size(); i++){
-                    if(events.get(i).getName().equals(stringInput)){
-                        Event event = events.get(i);
+                for (Event eventFromList : events){
+                    if(eventFromList.getName().equals(stringInput)){
+                        Event event = eventFromList;
                         if(event instanceof Excursion) {
                             exists = true;
                             editExcursion(event);
@@ -185,10 +186,10 @@ public class Menu {
         System.out.println("Please type the name of the Arrangement you wish to create an event under.");
         stringInput = input.nextLine();  // Vi vælger hvilket arrangement eventet skal laves under
         boolean exists = false;
-        for (int i = 0; i < arrangements.size(); i++){
-            if(arrangements.get(i).getName().equals(stringInput)){
+        for (Arrangement arrangementFromList : arrangements){
+            if(arrangementFromList.getName().equals(stringInput)){
                 exists = true;
-                arrangement = arrangements.get(i);
+                arrangement = arrangementFromList;
                 break; // breaker ud af for loopet
             }
         }
@@ -512,10 +513,10 @@ public class Menu {
             case 2: System.out.println("Please type the ID of the facilitator you wish to edit: ");
                 stringInput = input.nextLine();
                 boolean exists = false;
-                for (int i = 0; i < facilitators.size(); i++){
-                    if(facilitators.get(i).getID().equals(stringInput)){
+                for (Facilitator facilitator : facilitators){
+                    if(facilitator.getID().equals(stringInput)){
                         exists = true;
-                        editFacilitator(facilitators.get(i));
+                        editFacilitator(facilitator);
                         break; // breaker ud af for loopet
                     }
                 }
@@ -597,10 +598,10 @@ public class Menu {
             case 2: System.out.println("Please type the name of the customer you wish to edit: ");
                 stringInput = input.nextLine();
                 boolean exists = false;
-                for (int i = 0; i < customers.size(); i++){
-                    if(customers.get(i).getName().equals(stringInput)){
+                for (Customer customer : customers){
+                    if(customer.getName().equals(stringInput)){
                         exists = true;
-                        editCustomer(customers.get(i));
+                        editCustomer(customer);
                         break; // breaker ud af for loopet
                     }
                 }

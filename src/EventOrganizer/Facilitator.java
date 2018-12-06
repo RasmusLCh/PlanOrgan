@@ -89,9 +89,6 @@ public class Facilitator implements Readable, Exportable {
             listOfArrangements.remove(event.getArrangement());
         }
     } //Fjerner et event fra listen, og det tilhørende Arrangement hvis det ikke er over andre events.
-    public ArrayList<Arrangement> getListOfArrangements(){
-        return listOfArrangements;
-    }
 
     public void deleteFacilitator(){
         Menu.facilitators.remove(this); //fjerner fra facilitator liste

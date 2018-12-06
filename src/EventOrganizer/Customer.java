@@ -71,6 +71,7 @@ public class Customer implements Exportable, Readable {
     public void deleteCustomer() {
         Menu.customers.remove(this); // fjerner fra customer listen
         Filehandling.deleteFromMaster("CUSTOMER_" + name); // sletter linje fra masterFile om customer
+        Filehandling.removeExportable(this);
     }
 
 }

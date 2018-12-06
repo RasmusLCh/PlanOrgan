@@ -37,8 +37,7 @@ public class Menu {
                 break;
             case 4: customerMenu();
                 break;
-            case 0: Filehandling.exportAll();
-                return;
+            case 0: return;
             default: System.out.println("Invalid Input, try again");
                 startMenu();
                 break;

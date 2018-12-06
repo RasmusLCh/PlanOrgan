@@ -153,7 +153,7 @@ public class Event implements Readable, Exportable {
         if(this.facilitator != null){
             this.facilitator.removeFromEventList(this); //fjerner gammel facilitator fra eventet
         }
-        for (Facilitator facilitatorFromList : Menu.facilitators){ //søger customer listen igennem for at finde en med det rigtige navn
+        for (Facilitator facilitatorFromList : Menu.facilitators){ //søger facilitator listen igennem for at finde en med det rigtige ID
             if(facilitatorFromList.getID().equals(facilitator)){
                 this.facilitator = facilitatorFromList; // tilføjer den her.
                 this.facilitator.addToEventList(this); // tilføjer den i dens egen instans.
